@@ -4,7 +4,7 @@
 
 import typing_extensions
 import typing_extensions
-from murf_ai.core.serialization import FieldMetadata
+from murf.core.serialization import FieldMetadata
 
 
 class CircleParams(typing_extensions.TypedDict):

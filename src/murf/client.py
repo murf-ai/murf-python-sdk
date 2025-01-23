@@ -4,11 +4,11 @@ import typing
 from .environment import MurfEnvironment
 import httpx
 from .core.client_wrapper import SyncClientWrapper
-from .authentication_resource.client import AuthenticationResourceClient
-from .speech_resource.client import SpeechResourceClient
+from .auth.client import AuthClient
+from .text_to_speech.client import TextToSpeechClient
 from .core.client_wrapper import AsyncClientWrapper
-from .authentication_resource.client import AsyncAuthenticationResourceClient
-from .speech_resource.client import AsyncSpeechResourceClient
+from .auth.client import AsyncAuthClient
+from .text_to_speech.client import AsyncTextToSpeechClient
 
 
 class Murf:
@@ -29,7 +29,7 @@ class Murf:
 
 
 
-    api_key : str
+    api_key : typing.Optional[str]
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
@@ -41,7 +41,7 @@ class Murf:
 
     Examples
     --------
-    from murf_ai import Murf
+    from murf import Murf
 
     client = Murf(
         api_key="YOUR_API_KEY",
@@ -53,7 +53,7 @@ class Murf:
         *,
         base_url: typing.Optional[str] = None,
         environment: MurfEnvironment = MurfEnvironment.DEFAULT,
-        api_key: str,
+        api_key: typing.Optional[str] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
@@ -69,8 +69,8 @@ class Murf:
             else httpx.Client(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
-        self.authentication_resource = AuthenticationResourceClient(client_wrapper=self._client_wrapper)
-        self.speech_resource = SpeechResourceClient(client_wrapper=self._client_wrapper)
+        self.auth = AuthClient(client_wrapper=self._client_wrapper)
+        self.text_to_speech = TextToSpeechClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncMurf:
@@ -91,7 +91,7 @@ class AsyncMurf:
 
 
 
-    api_key : str
+    api_key : typing.Optional[str]
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
@@ -103,7 +103,7 @@ class AsyncMurf:
 
     Examples
     --------
-    from murf_ai import AsyncMurf
+    from murf import AsyncMurf
 
     client = AsyncMurf(
         api_key="YOUR_API_KEY",
@@ -115,7 +115,7 @@ class AsyncMurf:
         *,
         base_url: typing.Optional[str] = None,
         environment: MurfEnvironment = MurfEnvironment.DEFAULT,
-        api_key: str,
+        api_key: typing.Optional[str] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
@@ -131,8 +131,8 @@ class AsyncMurf:
             else httpx.AsyncClient(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
         )
-        self.authentication_resource = AsyncAuthenticationResourceClient(client_wrapper=self._client_wrapper)
-        self.speech_resource = AsyncSpeechResourceClient(client_wrapper=self._client_wrapper)
+        self.auth = AsyncAuthClient(client_wrapper=self._client_wrapper)
+        self.text_to_speech = AsyncTextToSpeechClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: MurfEnvironment) -> str:

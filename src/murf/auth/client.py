@@ -13,11 +13,11 @@ from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper
 
 
-class AuthenticationResourceClient:
+class AuthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def create_auth_token(self, *, request_options: typing.Optional[RequestOptions] = None) -> AuthTokenResponse:
+    def generate_token(self, *, request_options: typing.Optional[RequestOptions] = None) -> AuthTokenResponse:
         """
         Generates an auth token for authenticating your requests
 
@@ -33,12 +33,12 @@ class AuthenticationResourceClient:
 
         Examples
         --------
-        from murf_ai import Murf
+        from murf import Murf
 
         client = Murf(
             api_key="YOUR_API_KEY",
         )
-        client.authentication_resource.create_auth_token()
+        client.auth.generate_token()
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/auth/token",
@@ -90,11 +90,11 @@ class AuthenticationResourceClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
 
-class AsyncAuthenticationResourceClient:
+class AsyncAuthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def create_auth_token(self, *, request_options: typing.Optional[RequestOptions] = None) -> AuthTokenResponse:
+    async def generate_token(self, *, request_options: typing.Optional[RequestOptions] = None) -> AuthTokenResponse:
         """
         Generates an auth token for authenticating your requests
 
@@ -112,7 +112,7 @@ class AsyncAuthenticationResourceClient:
         --------
         import asyncio
 
-        from murf_ai import AsyncMurf
+        from murf import AsyncMurf
 
         client = AsyncMurf(
             api_key="YOUR_API_KEY",
@@ -120,7 +120,7 @@ class AsyncAuthenticationResourceClient:
 
 
         async def main() -> None:
-            await client.authentication_resource.create_auth_token()
+            await client.auth.generate_token()
 
 
         asyncio.run(main())

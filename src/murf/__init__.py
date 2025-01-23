@@ -18,10 +18,10 @@ from .errors import (
     ServiceUnavailableError,
     UnauthorizedError,
 )
-from . import authentication_resource, speech_resource
+from . import auth, text_to_speech
 from .client import AsyncMurf, Murf
 from .environment import MurfEnvironment
-from .speech_resource import GenerateSpeechRequestModelVersion
+from .text_to_speech import GenerateSpeechRequestModelVersion
 from .version import __version__
 
 __all__ = [
@@ -44,6 +44,6 @@ __all__ = [
     "UnauthorizedError",
     "WordDuration",
     "__version__",
-    "authentication_resource",
-    "speech_resource",
+    "auth",
+    "text_to_speech",
 ]

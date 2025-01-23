@@ -1,9 +1,9 @@
-# MurfAi Python Library
+# Murf Python Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fmurf-ai%2Fmurf-python-sdk)
 [![pypi](https://img.shields.io/pypi/v/murf)](https://pypi.python.org/pypi/murf)
 
-The MurfAi Python library provides convenient access to the MurfAi API from Python.
+The Murf Python library provides convenient access to the Murf API from Python.
 
 ## Installation
 
@@ -20,14 +20,17 @@ A full reference for this library is available [here](./reference.md).
 Instantiate and use the client with the following:
 
 ```python
-from murf_ai import Murf
+from murf import Murf
 
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.speech_resource.generate_speech(
-    text="text",
-    voice_id="voiceId",
+client.text_to_speech.generate(
+    channel_type="STEREO",
+    format="MP3",
+    sample_rate=44100.0,
+    text="Hello, world!",
+    voice_id="en-US-natalie",
 )
 ```
 
@@ -38,7 +41,7 @@ The SDK also exports an `async` client so that you can make non-blocking calls t
 ```python
 import asyncio
 
-from murf_ai import AsyncMurf
+from murf import AsyncMurf
 
 client = AsyncMurf(
     api_key="YOUR_API_KEY",
@@ -46,9 +49,12 @@ client = AsyncMurf(
 
 
 async def main() -> None:
-    await client.speech_resource.generate_speech(
-        text="text",
-        voice_id="voiceId",
+    await client.text_to_speech.generate(
+        channel_type="STEREO",
+        format="MP3",
+        sample_rate=44100.0,
+        text="Hello, world!",
+        voice_id="en-US-natalie",
     )
 
 
@@ -61,10 +67,10 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```python
-from murf_ai.core.api_error import ApiError
+from murf.core.api_error import ApiError
 
 try:
-    client.speech_resource.generate_speech(...)
+    client.text_to_speech.generate(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -87,7 +93,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.speech_resource.generate_speech(..., request_options={
+client.text_to_speech.generate(..., request_options={
     "max_retries": 1
 })
 ```
@@ -98,7 +104,7 @@ The SDK defaults to a 60 second timeout. You can configure this with a timeout o
 
 ```python
 
-from murf_ai import Murf
+from murf import Murf
 
 client = Murf(
     ...,
@@ -107,7 +113,7 @@ client = Murf(
 
 
 # Override timeout for a specific method
-client.speech_resource.generate_speech(..., request_options={
+client.text_to_speech.generate(..., request_options={
     "timeout_in_seconds": 1
 })
 ```
@@ -118,7 +124,7 @@ You can override the `httpx` client to customize it for your use-case. Some comm
 and transports.
 ```python
 import httpx
-from murf_ai import Murf
+from murf import Murf
 
 client = Murf(
     ...,

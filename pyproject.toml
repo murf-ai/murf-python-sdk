@@ -3,7 +3,7 @@ name = "murf"
 
 [tool.poetry]
 name = "murf"
-version = "0.0.3"
+version = "0.0.5"
 description = ""
 readme = "README.md"
 authors = []
@@ -27,7 +27,7 @@ classifiers = [
     "Typing :: Typed"
 ]
 packages = [
-    { include = "murf_ai", from = "src"}
+    { include = "murf", from = "src"}
 ]
 
 [project.urls]

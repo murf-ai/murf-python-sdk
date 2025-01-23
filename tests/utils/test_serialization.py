@@ -2,7 +2,7 @@
 
 from typing import List, Any
 
-from murf_ai.core.serialization import convert_and_respect_annotation_metadata
+from murf.core.serialization import convert_and_respect_annotation_metadata
 from .assets.models import ShapeParams, ObjectWithOptionalFieldParams
 
 

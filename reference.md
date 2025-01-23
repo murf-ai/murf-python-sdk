@@ -1,6 +1,6 @@
 # Reference
-## AuthenticationResource
-<details><summary><code>client.authentication_resource.<a href="src/murf_ai/authentication_resource/client.py">create_auth_token</a>()</code></summary>
+## Auth
+<details><summary><code>client.auth.<a href="src/murf/auth/client.py">generate_token</a>()</code></summary>
 <dl>
 <dd>
 
@@ -27,12 +27,12 @@ Generates an auth token for authenticating your requests
 <dd>
 
 ```python
-from murf_ai import Murf
+from murf import Murf
 
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.authentication_resource.create_auth_token()
+client.auth.generate_token()
 
 ```
 </dd>
@@ -60,8 +60,8 @@ client.authentication_resource.create_auth_token()
 </dl>
 </details>
 
-## SpeechResource
-<details><summary><code>client.speech_resource.<a href="src/murf_ai/speech_resource/client.py">generate_speech</a>(...)</code></summary>
+## TextToSpeech
+<details><summary><code>client.text_to_speech.<a href="src/murf/text_to_speech/client.py">generate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -88,14 +88,17 @@ Returns a url to the generated audio file along with other associated properties
 <dd>
 
 ```python
-from murf_ai import Murf
+from murf import Murf
 
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.speech_resource.generate_speech(
-    text="text",
-    voice_id="voiceId",
+client.text_to_speech.generate(
+    channel_type="STEREO",
+    format="MP3",
+    sample_rate=44100.0,
+    text="Hello, world!",
+    voice_id="en-US-natalie",
 )
 
 ```
@@ -121,14 +124,6 @@ client.speech_resource.generate_speech(
 <dd>
 
 **voice_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**token:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -253,7 +248,7 @@ An object used to define custom pronunciations.
 </dl>
 </details>
 
-<details><summary><code>client.speech_resource.<a href="src/murf_ai/speech_resource/client.py">list_voices</a>(...)</code></summary>
+<details><summary><code>client.text_to_speech.<a href="src/murf/text_to_speech/client.py">get_voices</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -280,12 +275,12 @@ Returns a list of available voices for speech synthesis
 <dd>
 
 ```python
-from murf_ai import Murf
+from murf import Murf
 
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.speech_resource.list_voices()
+client.text_to_speech.get_voices()
 
 ```
 </dd>

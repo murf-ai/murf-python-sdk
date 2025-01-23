@@ -22,16 +22,15 @@ from ..core.client_wrapper import AsyncClientWrapper
 OMIT = typing.cast(typing.Any, ...)
 
 
-class SpeechResourceClient:
+class TextToSpeechClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def generate_speech(
+    def generate(
         self,
         *,
         text: str,
         voice_id: str,
-        token: typing.Optional[str] = None,
         audio_duration: typing.Optional[float] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         encode_as_base_64: typing.Optional[bool] = OMIT,
@@ -55,8 +54,6 @@ class SpeechResourceClient:
             The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
 
         voice_id : str
-
-        token : typing.Optional[str]
 
         audio_duration : typing.Optional[float]
             This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.
@@ -109,14 +106,14 @@ class SpeechResourceClient:
 
         Examples
         --------
-        from murf_ai import Murf
+        from murf import Murf
 
         client = Murf(
             api_key="YOUR_API_KEY",
         )
-        client.speech_resource.generate_speech(
-            text="text",
-            voice_id="voiceId",
+        client.text_to_speech.generate(
+            text="Hello, world!",
+            voice_id="en-US-natalie",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -144,7 +141,6 @@ class SpeechResourceClient:
             },
             headers={
                 "content-type": "application/json",
-                "token": str(token) if token is not None else None,
             },
             request_options=request_options,
             omit=OMIT,
@@ -213,7 +209,7 @@ class SpeechResourceClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def list_voices(
+    def get_voices(
         self, *, token: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[ApiVoice]:
         """
@@ -233,12 +229,12 @@ class SpeechResourceClient:
 
         Examples
         --------
-        from murf_ai import Murf
+        from murf import Murf
 
         client = Murf(
             api_key="YOUR_API_KEY",
         )
-        client.speech_resource.list_voices()
+        client.text_to_speech.get_voices()
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/speech/voices",
@@ -303,16 +299,15 @@ class SpeechResourceClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
 
-class AsyncSpeechResourceClient:
+class AsyncTextToSpeechClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def generate_speech(
+    async def generate(
         self,
         *,
         text: str,
         voice_id: str,
-        token: typing.Optional[str] = None,
         audio_duration: typing.Optional[float] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         encode_as_base_64: typing.Optional[bool] = OMIT,
@@ -336,8 +331,6 @@ class AsyncSpeechResourceClient:
             The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
 
         voice_id : str
-
-        token : typing.Optional[str]
 
         audio_duration : typing.Optional[float]
             This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.
@@ -392,7 +385,7 @@ class AsyncSpeechResourceClient:
         --------
         import asyncio
 
-        from murf_ai import AsyncMurf
+        from murf import AsyncMurf
 
         client = AsyncMurf(
             api_key="YOUR_API_KEY",
@@ -400,9 +393,9 @@ class AsyncSpeechResourceClient:
 
 
         async def main() -> None:
-            await client.speech_resource.generate_speech(
-                text="text",
-                voice_id="voiceId",
+            await client.text_to_speech.generate(
+                text="Hello, world!",
+                voice_id="en-US-natalie",
             )
 
 
@@ -433,7 +426,6 @@ class AsyncSpeechResourceClient:
             },
             headers={
                 "content-type": "application/json",
-                "token": str(token) if token is not None else None,
             },
             request_options=request_options,
             omit=OMIT,
@@ -502,7 +494,7 @@ class AsyncSpeechResourceClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def list_voices(
+    async def get_voices(
         self, *, token: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[ApiVoice]:
         """
@@ -524,7 +516,7 @@ class AsyncSpeechResourceClient:
         --------
         import asyncio
 
-        from murf_ai import AsyncMurf
+        from murf import AsyncMurf
 
         client = AsyncMurf(
             api_key="YOUR_API_KEY",
@@ -532,7 +524,7 @@ class AsyncSpeechResourceClient:
 
 
         async def main() -> None:
-            await client.speech_resource.list_voices()
+            await client.text_to_speech.get_voices()
 
 
         asyncio.run(main())

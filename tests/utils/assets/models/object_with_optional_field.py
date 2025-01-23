@@ -5,7 +5,7 @@
 import typing_extensions
 import typing
 import typing_extensions
-from murf_ai.core.serialization import FieldMetadata
+from murf.core.serialization import FieldMetadata
 import datetime as dt
 import uuid
 from .color import Color
