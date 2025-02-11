@@ -11,7 +11,7 @@ from .auth.client import AsyncAuthClient
 from .text_to_speech.client import AsyncTextToSpeechClient
 
 
-class Murf:
+class BaseClient:
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -73,7 +73,7 @@ class Murf:
         self.text_to_speech = TextToSpeechClient(client_wrapper=self._client_wrapper)
 
 
-class AsyncMurf:
+class AsyncBaseClient:
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
