@@ -94,9 +94,11 @@ client = Murf(
     api_key="YOUR_API_KEY",
 )
 client.text_to_speech.generate(
-    text="And off they went. Gently walking into the sunset, with not a single care in the world",
-    variation=5,
-    voice_id="en-US-julia",
+    channel_type="STEREO",
+    format="MP3",
+    sample_rate=44100.0,
+    text="Hello, world!",
+    voice_id="en-US-natalie",
 )
 
 ```
