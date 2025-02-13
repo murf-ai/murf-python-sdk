@@ -88,24 +88,15 @@ Returns a url to the generated audio file along with other associated properties
 <dd>
 
 ```python
-from murf import Murf, PronunciationDetail
+from murf import Murf
 
 client = Murf(
     api_key="YOUR_API_KEY",
 )
 client.text_to_speech.generate(
-    pronunciation_dictionary={
-        "2010": PronunciationDetail(
-            pronunciation="two thousand and ten",
-            type="SAY_AS",
-        ),
-        "live": PronunciationDetail(
-            pronunciation="laɪv",
-            type="IPA",
-        ),
-    },
-    text="The 2010 world cup was held in South Africa",
-    voice_id="en-US-natalie",
+    text="And off they went. Gently walking into the sunset, with not a single care in the world",
+    variation=5,
+    voice_id="en-US-julia",
 )
 
 ```

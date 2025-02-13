@@ -20,24 +20,15 @@ A full reference for this library is available [here](./reference.md).
 Instantiate and use the client with the following:
 
 ```python
-from murf import Murf, PronunciationDetail
+from murf import Murf
 
 client = Murf(
     api_key="YOUR_API_KEY",
 )
 client.text_to_speech.generate(
-    pronunciation_dictionary={
-        "2010": PronunciationDetail(
-            pronunciation="two thousand and ten",
-            type="SAY_AS",
-        ),
-        "live": PronunciationDetail(
-            pronunciation="laɪv",
-            type="IPA",
-        ),
-    },
-    text="The 2010 world cup was held in South Africa",
-    voice_id="en-US-natalie",
+    text="And off they went. Gently walking into the sunset, with not a single care in the world",
+    variation=5,
+    voice_id="en-US-julia",
 )
 ```
 
@@ -48,7 +39,7 @@ The SDK also exports an `async` client so that you can make non-blocking calls t
 ```python
 import asyncio
 
-from murf import AsyncMurf, PronunciationDetail
+from murf import AsyncMurf
 
 client = AsyncMurf(
     api_key="YOUR_API_KEY",
@@ -57,18 +48,9 @@ client = AsyncMurf(
 
 async def main() -> None:
     await client.text_to_speech.generate(
-        pronunciation_dictionary={
-            "2010": PronunciationDetail(
-                pronunciation="two thousand and ten",
-                type="SAY_AS",
-            ),
-            "live": PronunciationDetail(
-                pronunciation="laɪv",
-                type="IPA",
-            ),
-        },
-        text="The 2010 world cup was held in South Africa",
-        voice_id="en-US-natalie",
+        text="And off they went. Gently walking into the sunset, with not a single care in the world",
+        variation=5,
+        voice_id="en-US-julia",
     )
 
 
