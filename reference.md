@@ -94,7 +94,6 @@ client = Murf(
     api_key="YOUR_API_KEY",
 )
 client.text_to_speech.generate(
-    channel_type="STEREO",
     format="MP3",
     sample_rate=44100.0,
     text="Hello, world!",
