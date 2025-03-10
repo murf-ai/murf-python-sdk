@@ -1,24 +1,46 @@
-# Murf Python Library
+# Murf Python SDK
+
+![Murf AI Logo](https://murf.ai/public-assets/home/Murf_Logo.png)
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fmurf-ai%2Fmurf-python-sdk)
 [![pypi](https://img.shields.io/pypi/v/murf)](https://pypi.python.org/pypi/murf)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/gist/devgeetech-murf/bbe2c7eb01433f4a151f0fd2be23b1c8/murf-python-sdk.ipynb)
 
-The Murf Python library provides convenient access to the Murf API from Python.
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Features](#features)
+- [Asynchronous Usage](#async-client)
+- [Exception Handling](#exception-handling)
+- [Advanced Configuration](#advanced)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Overview
+
+The Murf Python SDK offers seamless integration with the [Murf AI](https://murf.ai/) [text-to-speech software](https://murf.ai/text-to-speech), enabling developers and creators to convert text into lifelike speech effortlessly. With over 130 natural-sounding voices across 13+ languages and 20+ speaking styles, Murf provides unparalleled speech customization for a wide range of applications. The SDK is designed for both synchronous and asynchronous workflows, featuring robust error handling, advanced configuration options, and support for real-time applications.
+
+---
 
 ## Installation
 
-```sh
+Check out the [HTTP API documentation](https://murf.ai/api/docs/introduction/quickstart).
+
+Install the SDK using pip:
+
+```bash
 pip install murf
 ```
 
-## Reference
+---
 
-A full reference for this library is available [here](./reference.md).
+## Getting Started
 
-## Usage
-
-Instantiate and use the client with the following:
+Here's a quick example to get you started with the Murf SDK:
 
 ```python
 from murf import Murf
@@ -33,6 +55,25 @@ client.text_to_speech.generate(
     voice_id="en-US-natalie",
 )
 ```
+
+For more detailed information, refer to the [official documentation](https://murf.ai/api/docs/introduction/quickstart).
+
+---
+
+## Features
+
+- **Text-to-Speech Conversion:** Transform text into natural-sounding speech.
+- **Multilingual Support:** Access voices in over 13 languages, including English, French, German, Spanish, Italian, Hindi, Portuguese, Dutch, Korean, Chinese (Mandarin), Bengali, Tamil, and Polish.
+
+![Murf AI Languages](https://murf.ai/public-assets/home/Murf_Lang.png)
+
+- **Multiple Voice Styles:** Choose from 20+ speaking styles to suit your application's needs.
+- **Advanced Voice Customization:** Adjust parameters like pitch, speed, pauses, and pronunciation for optimal output. Fine-grained controls let you tailor the voice output to match your specific requirements.
+- **Multiple Audio Formats:** Generate audio in various formats (e.g., MP3, WAV) with configurable sample rates for optimal quality.
+- **Real-Time Processing:** Benefit from asynchronous API calls that support non-blocking, real-time audio generation and streaming scenarios.
+
+
+---
 
 ## Async Client
 
@@ -60,6 +101,8 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
+---
+
 ## Exception Handling
 
 When the API returns a non-success status code (4xx or 5xx response), a subclass of the following error
@@ -74,6 +117,8 @@ except ApiError as e:
     print(e.status_code)
     print(e.body)
 ```
+
+---
 
 ## Advanced
 
@@ -134,12 +179,16 @@ client = Murf(
 )
 ```
 
+---
+
 ## Contributing
 
-While we value open-source contributions to this SDK, this library is generated programmatically.
-Additions made directly to this library would have to be moved over to our generation code,
-otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
-a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
-an issue first to discuss with us!
+We welcome contributions to enhance the Murf Python SDK. Please note that this library is generated programmatically, so direct modifications may be overwritten. We suggest opening an issue first to discuss your ideas or improvements. Contributions to the documentation are especially appreciated! For any support queries email to support@murf.ai 
 
-On the other hand, contributions to the README are always very welcome!
+---
+
+## License
+
+Murf Python SDK is released under the [MIT License](LICENSE).
+
+---
