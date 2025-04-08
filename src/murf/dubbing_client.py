@@ -59,7 +59,7 @@ class MurfDub(BaseClient):
             follow_redirects=follow_redirects,
             httpx_client=httpx_client
         )
-        self.text_to_speech = None
+        self.text_to_speech = None # type: ignore
 
 
 class AsyncMurfDub(AsyncBaseClient):
@@ -117,4 +117,4 @@ class AsyncMurfDub(AsyncBaseClient):
             follow_redirects=follow_redirects,
             httpx_client=httpx_client
         )
-        self.text_to_speech = None
+        self.text_to_speech = None # type: ignore

@@ -59,7 +59,7 @@ class Murf(BaseClient):
             follow_redirects=follow_redirects,
             httpx_client=httpx_client
         )
-        self.dubbing = None
+        self.dubbing = None # type: ignore
 
 
 class AsyncMurf(AsyncBaseClient):
@@ -117,4 +117,4 @@ class AsyncMurf(AsyncBaseClient):
             follow_redirects=follow_redirects,
             httpx_client=httpx_client
         )
-        self.dubbing = None
+        self.dubbing = None # type: ignore
