@@ -4,7 +4,7 @@ import typing
 import os
 import httpx
 
-class Murf(BaseClient):
+class MurfDub(BaseClient):
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -34,9 +34,9 @@ class Murf(BaseClient):
 
     Examples
     --------
-    from murf import Murf
+    from murf import MurfDub
 
-    client = Murf(
+    client = MurfDub(
         api_key="YOUR_API_KEY",
     )
     """
@@ -46,7 +46,7 @@ class Murf(BaseClient):
         *,
         base_url: typing.Optional[str] = None,
         environment: MurfEnvironment = MurfEnvironment.DEFAULT,
-        api_key: typing.Optional[str] = os.getenv("MURF_API_KEY"),
+        api_key: typing.Optional[str] = os.getenv("MURFDUB_API_KEY"),
         timeout: typing.Optional[float] = 60,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
@@ -59,10 +59,10 @@ class Murf(BaseClient):
             follow_redirects=follow_redirects,
             httpx_client=httpx_client
         )
-        self.dubbing = None
+        self.text_to_speech = None
 
 
-class AsyncMurf(AsyncBaseClient):
+class AsyncMurfDub(AsyncBaseClient):
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
@@ -92,9 +92,9 @@ class AsyncMurf(AsyncBaseClient):
 
     Examples
     --------
-    from murf import AsyncMurf
+    from murf import AsyncMurfDub
 
-    client = AsyncMurf(
+    client = AsyncMurfDub(
         api_key="YOUR_API_KEY",
     )
     """
@@ -104,7 +104,7 @@ class AsyncMurf(AsyncBaseClient):
         *,
         base_url: typing.Optional[str] = None,
         environment: MurfEnvironment = MurfEnvironment.DEFAULT,
-        api_key: typing.Optional[str] = os.getenv("MURF_API_KEY"),
+        api_key: typing.Optional[str] = os.getenv("MURFDUB_API_KEY"),
         timeout: typing.Optional[float] = 60,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
@@ -117,4 +117,4 @@ class AsyncMurf(AsyncBaseClient):
             follow_redirects=follow_redirects,
             httpx_client=httpx_client
         )
-        self.dubbing = None
+        self.text_to_speech = None
