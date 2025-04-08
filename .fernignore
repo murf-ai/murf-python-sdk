@@ -1,6 +1,7 @@
 .github/
 
 src/murf/client.py
+src/murf/dubbing_client.py
 LICENSE
 
 README.md
