@@ -315,3 +315,576 @@ client.text_to_speech.get_voices()
 </dl>
 </details>
 
+## Dubbing Languages
+<details><summary><code>client.dubbing.languages.<a href="src/murf/dubbing/languages/client.py">list_destination_languages</a>()</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",
+)
+client.dubbing.languages.list_destination_languages()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.languages.<a href="src/murf/dubbing/languages/client.py">list_source_languages</a>()</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",
+)
+client.dubbing.languages.list_source_languages()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Dubbing Jobs
+<details><summary><code>client.dubbing.jobs.<a href="src/murf/dubbing/jobs/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",
+)
+client.dubbing.jobs.create(
+    target_locales=["target_locales"],
+    priority="LOW",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**target_locales:** `typing.List[str]` — List of target locales
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**priority:** `JobsCreateRequestPriority` — Priority of the job. Allowed values: LOW, NORMAL, HIGH
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file:** `from __future__ import annotations
+
+typing.Optional[core.File]` — See core.File for more documentation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source_locale:** `typing.Optional[str]` — Source locale
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**webhook_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.jobs.<a href="src/murf/dubbing/jobs/client.py">create_with_project_id</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",
+)
+client.dubbing.jobs.create_with_project_id(
+    project_id="project_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` — Your Project Id
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file:** `from __future__ import annotations
+
+typing.Optional[core.File]` — See core.File for more documentation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**webhook_url:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**priority:** `typing.Optional[JobsCreateWithProjectIdRequestPriority]` — Priority of the job. Allowed values: LOW, NORMAL, HIGH
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.jobs.<a href="src/murf/dubbing/jobs/client.py">get_status</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",
+)
+client.dubbing.jobs.get_status(
+    job_id="job_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**job_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Dubbing Projects
+<details><summary><code>client.dubbing.projects.<a href="src/murf/dubbing/projects/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",
+)
+client.dubbing.projects.create(
+    name="name",
+    dubbing_type="AUTOMATED",
+    target_locales=["target_locales"],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `str` — Your Project Name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dubbing_type:** `ApiCreateProjectRequestDubbingType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**target_locales:** `typing.Sequence[str]` — List of target locales
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source_locale:** `typing.Optional[str]` — Source Locale
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.projects.<a href="src/murf/dubbing/projects/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",
+)
+client.dubbing.projects.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — Number of Projects in response
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**next:** `typing.Optional[str]` — Next Page Iterator
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.dubbing.projects.<a href="src/murf/dubbing/projects/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",
+)
+client.dubbing.projects.update(
+    project_id="project_id",
+    target_locales=["target_locales"],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**target_locales:** `typing.Sequence[str]` — List of target locales
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+

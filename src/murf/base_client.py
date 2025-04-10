@@ -6,9 +6,11 @@ import httpx
 from .core.client_wrapper import SyncClientWrapper
 from .auth.client import AuthClient
 from .text_to_speech.client import TextToSpeechClient
+from .dubbing.client import DubbingClient
 from .core.client_wrapper import AsyncClientWrapper
 from .auth.client import AsyncAuthClient
 from .text_to_speech.client import AsyncTextToSpeechClient
+from .dubbing.client import AsyncDubbingClient
 
 
 class BaseClient:
@@ -71,6 +73,7 @@ class BaseClient:
         )
         self.auth = AuthClient(client_wrapper=self._client_wrapper)
         self.text_to_speech = TextToSpeechClient(client_wrapper=self._client_wrapper)
+        self.dubbing = DubbingClient(client_wrapper=self._client_wrapper)
 
 
 class AsyncBaseClient:
@@ -133,6 +136,7 @@ class AsyncBaseClient:
         )
         self.auth = AsyncAuthClient(client_wrapper=self._client_wrapper)
         self.text_to_speech = AsyncTextToSpeechClient(client_wrapper=self._client_wrapper)
+        self.dubbing = AsyncDubbingClient(client_wrapper=self._client_wrapper)
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: MurfEnvironment) -> str:
