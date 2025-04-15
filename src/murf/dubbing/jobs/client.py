@@ -2,8 +2,8 @@
 
 import typing
 from ...core.client_wrapper import SyncClientWrapper
-from .types.jobs_create_request_priority import JobsCreateRequestPriority
 from ... import core
+from .types.jobs_create_request_priority import JobsCreateRequestPriority
 from ...core.request_options import RequestOptions
 from ...types.api_job_response import ApiJobResponse
 from ...core.pydantic_utilities import parse_obj_as
@@ -30,12 +30,13 @@ class JobsClient:
         self,
         *,
         target_locales: typing.List[str],
-        priority: JobsCreateRequestPriority,
         file: typing.Optional[core.File] = OMIT,
         file_url: typing.Optional[str] = OMIT,
         source_locale: typing.Optional[str] = OMIT,
         webhook_url: typing.Optional[str] = OMIT,
         file_name: typing.Optional[str] = OMIT,
+        priority: typing.Optional[JobsCreateRequestPriority] = OMIT,
+        webhook_secret: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ApiJobResponse:
         """
@@ -43,9 +44,6 @@ class JobsClient:
         ----------
         target_locales : typing.List[str]
             List of target locales
-
-        priority : JobsCreateRequestPriority
-            Priority of the job. Allowed values: LOW, NORMAL, HIGH
 
         file : typing.Optional[core.File]
             See core.File for more documentation
@@ -58,6 +56,11 @@ class JobsClient:
         webhook_url : typing.Optional[str]
 
         file_name : typing.Optional[str]
+
+        priority : typing.Optional[JobsCreateRequestPriority]
+            Priority of the job. Allowed values: LOW, NORMAL, HIGH
+
+        webhook_secret : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -76,7 +79,6 @@ class JobsClient:
         )
         client.dubbing.jobs.create(
             target_locales=["target_locales"],
-            priority="LOW",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -89,6 +91,7 @@ class JobsClient:
                 "webhook_url": webhook_url,
                 "file_name": file_name,
                 "priority": priority,
+                "webhook_secret": webhook_secret,
             },
             files={
                 "file": file,
@@ -159,6 +162,7 @@ class JobsClient:
         webhook_url: typing.Optional[str] = OMIT,
         file_name: typing.Optional[str] = OMIT,
         priority: typing.Optional[JobsCreateWithProjectIdRequestPriority] = OMIT,
+        webhook_secret: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ApiJobResponse:
         """
@@ -178,6 +182,8 @@ class JobsClient:
 
         priority : typing.Optional[JobsCreateWithProjectIdRequestPriority]
             Priority of the job. Allowed values: LOW, NORMAL, HIGH
+
+        webhook_secret : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -207,6 +213,7 @@ class JobsClient:
                 "webhook_url": webhook_url,
                 "file_name": file_name,
                 "priority": priority,
+                "webhook_secret": webhook_secret,
             },
             files={
                 "file": file,
@@ -363,12 +370,13 @@ class AsyncJobsClient:
         self,
         *,
         target_locales: typing.List[str],
-        priority: JobsCreateRequestPriority,
         file: typing.Optional[core.File] = OMIT,
         file_url: typing.Optional[str] = OMIT,
         source_locale: typing.Optional[str] = OMIT,
         webhook_url: typing.Optional[str] = OMIT,
         file_name: typing.Optional[str] = OMIT,
+        priority: typing.Optional[JobsCreateRequestPriority] = OMIT,
+        webhook_secret: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ApiJobResponse:
         """
@@ -376,9 +384,6 @@ class AsyncJobsClient:
         ----------
         target_locales : typing.List[str]
             List of target locales
-
-        priority : JobsCreateRequestPriority
-            Priority of the job. Allowed values: LOW, NORMAL, HIGH
 
         file : typing.Optional[core.File]
             See core.File for more documentation
@@ -391,6 +396,11 @@ class AsyncJobsClient:
         webhook_url : typing.Optional[str]
 
         file_name : typing.Optional[str]
+
+        priority : typing.Optional[JobsCreateRequestPriority]
+            Priority of the job. Allowed values: LOW, NORMAL, HIGH
+
+        webhook_secret : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -414,7 +424,6 @@ class AsyncJobsClient:
         async def main() -> None:
             await client.dubbing.jobs.create(
                 target_locales=["target_locales"],
-                priority="LOW",
             )
 
 
@@ -430,6 +439,7 @@ class AsyncJobsClient:
                 "webhook_url": webhook_url,
                 "file_name": file_name,
                 "priority": priority,
+                "webhook_secret": webhook_secret,
             },
             files={
                 "file": file,
@@ -500,6 +510,7 @@ class AsyncJobsClient:
         webhook_url: typing.Optional[str] = OMIT,
         file_name: typing.Optional[str] = OMIT,
         priority: typing.Optional[JobsCreateWithProjectIdRequestPriority] = OMIT,
+        webhook_secret: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ApiJobResponse:
         """
@@ -519,6 +530,8 @@ class AsyncJobsClient:
 
         priority : typing.Optional[JobsCreateWithProjectIdRequestPriority]
             Priority of the job. Allowed values: LOW, NORMAL, HIGH
+
+        webhook_secret : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -556,6 +569,7 @@ class AsyncJobsClient:
                 "webhook_url": webhook_url,
                 "file_name": file_name,
                 "priority": priority,
+                "webhook_secret": webhook_secret,
             },
             files={
                 "file": file,

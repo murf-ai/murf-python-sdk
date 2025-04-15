@@ -429,7 +429,6 @@ client = Murf(
 )
 client.dubbing.jobs.create(
     target_locales=["target_locales"],
-    priority="LOW",
 )
 
 ```
@@ -447,14 +446,6 @@ client.dubbing.jobs.create(
 <dd>
 
 **target_locales:** `typing.List[str]` — List of target locales
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**priority:** `JobsCreateRequestPriority` — Priority of the job. Allowed values: LOW, NORMAL, HIGH
     
 </dd>
 </dl>
@@ -497,6 +488,22 @@ typing.Optional[core.File]` — See core.File for more documentation
 <dd>
 
 **file_name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**priority:** `typing.Optional[JobsCreateRequestPriority]` — Priority of the job. Allowed values: LOW, NORMAL, HIGH
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**webhook_secret:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -595,6 +602,14 @@ typing.Optional[core.File]` — See core.File for more documentation
 <dd>
 
 **priority:** `typing.Optional[JobsCreateWithProjectIdRequestPriority]` — Priority of the job. Allowed values: LOW, NORMAL, HIGH
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**webhook_secret:** `typing.Optional[str]` 
     
 </dd>
 </dl>
