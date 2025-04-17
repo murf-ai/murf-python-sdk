@@ -63,7 +63,7 @@ For more detailed information, refer to the [official documentation](https://mur
 ## Features
 
 - **Text-to-Speech Conversion:** Transform text into natural-sounding speech.
-- **Multilingual Support:** Access voices in over 21 languages, including English, French, German, Spanish, Italian, Hindi, Portuguese, Dutch, Korean, Chinese (Mandarin), Bengali, Tamil, and Polish.
+- **Multilingual Support:** Access voices in over 21 languages, including English, French, German, Spanish, Italian, Hindi, Portuguese, Dutch, Korean, Chinese (Mandarin), Bengali, Tamil, Polish, Japanese, Turkish, Indonesian, Croatian, Greek, Romanian, Slovak, and Bulgarian.
 
 ![Murf AI Languages](https://murf.ai/public-assets/home/Murf_Languages_21.jpg)
 
