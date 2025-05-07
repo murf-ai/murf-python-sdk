@@ -2,37 +2,33 @@
 
 from ..core.pydantic_utilities import UniversalBaseModel
 import typing_extensions
-import typing
 from ..core.serialization import FieldMetadata
 import pydantic
-from .word_duration import WordDuration
+import typing
+from .word_duration_response import WordDurationResponse
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
 class GenerateSpeechResponse(UniversalBaseModel):
-    audio_file: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="audioFile")] = None
-    audio_length_in_seconds: typing_extensions.Annotated[
-        typing.Optional[float], FieldMetadata(alias="audioLengthInSeconds")
-    ] = None
-    consumed_character_count: typing_extensions.Annotated[
-        typing.Optional[int], FieldMetadata(alias="consumedCharacterCount")
-    ] = pydantic.Field(default=None)
+    audio_file: typing_extensions.Annotated[str, FieldMetadata(alias="audioFile")]
+    audio_length_in_seconds: typing_extensions.Annotated[float, FieldMetadata(alias="audioLengthInSeconds")]
+    consumed_character_count: typing_extensions.Annotated[int, FieldMetadata(alias="consumedCharacterCount")] = (
+        pydantic.Field()
+    )
     """
     Number of characters consumed so far in the current billing cycle.
     """
 
     encoded_audio: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="encodedAudio")] = None
-    remaining_character_count: typing_extensions.Annotated[
-        typing.Optional[int], FieldMetadata(alias="remainingCharacterCount")
-    ] = pydantic.Field(default=None)
+    remaining_character_count: typing_extensions.Annotated[int, FieldMetadata(alias="remainingCharacterCount")] = (
+        pydantic.Field()
+    )
     """
     Remaining number of characters available for synthesis in the current billing cycle.
     """
 
     warning: typing.Optional[str] = None
-    word_durations: typing_extensions.Annotated[
-        typing.Optional[typing.List[WordDuration]], FieldMetadata(alias="wordDurations")
-    ] = None
+    word_durations: typing_extensions.Annotated[typing.List[WordDurationResponse], FieldMetadata(alias="wordDurations")]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

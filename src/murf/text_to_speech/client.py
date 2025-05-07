@@ -54,6 +54,7 @@ class TextToSpeechClient:
             The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
 
         voice_id : str
+            Use the GET /v1/speech/voices api to find supported voiceIds.
 
         audio_duration : typing.Optional[float]
             This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.
@@ -72,7 +73,7 @@ class TextToSpeechClient:
 
         multi_native_locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
-            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speed/voices endpoint to retrieve the list of available voices and languages.
+            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
 
         pitch : typing.Optional[int]
             Pitch of the voiceover
@@ -209,6 +210,152 @@ class TextToSpeechClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def stream(
+        self,
+        *,
+        text: str,
+        voice_id: str,
+        token: typing.Optional[str] = None,
+        channel_type: typing.Optional[str] = OMIT,
+        format: typing.Optional[str] = OMIT,
+        multi_native_locale: typing.Optional[str] = OMIT,
+        pitch: typing.Optional[int] = OMIT,
+        rate: typing.Optional[int] = OMIT,
+        sample_rate: typing.Optional[float] = OMIT,
+        style: typing.Optional[str] = OMIT,
+        variation: typing.Optional[int] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Iterator[bytes]:
+        """
+        Returns a streaming output of generated audio
+
+        Parameters
+        ----------
+        text : str
+            The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
+
+        voice_id : str
+            Use the GET /v1/speech/voices api to find supported voiceIds.
+
+        token : typing.Optional[str]
+
+        channel_type : typing.Optional[str]
+            Valid values: STEREO, MONO
+
+        format : typing.Optional[str]
+            Format of the generated audio file. Valid values: MP3, WAV
+
+        multi_native_locale : typing.Optional[str]
+            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
+            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
+
+        pitch : typing.Optional[int]
+            Pitch of the voiceover
+
+        rate : typing.Optional[int]
+            Speed of the voiceover
+
+        sample_rate : typing.Optional[float]
+            Valid values are 8000, 24000, 44100, 48000
+
+        style : typing.Optional[str]
+            The voice style to be used for voiceover generation.
+
+        variation : typing.Optional[int]
+            Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
+
+        Yields
+        ------
+        typing.Iterator[bytes]
+            Ok
+        """
+        with self._client_wrapper.httpx_client.stream(
+            "v1/speech/stream",
+            method="POST",
+            json={
+                "channelType": channel_type,
+                "format": format,
+                "multiNativeLocale": multi_native_locale,
+                "pitch": pitch,
+                "rate": rate,
+                "sampleRate": sample_rate,
+                "style": style,
+                "text": text,
+                "variation": variation,
+                "voiceId": voice_id,
+            },
+            headers={
+                "content-type": "application/json",
+                "token": str(token) if token is not None else None,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        ) as _response:
+            try:
+                if 200 <= _response.status_code < 300:
+                    _chunk_size = request_options.get("chunk_size", None) if request_options is not None else None
+                    for _chunk in _response.iter_bytes(chunk_size=_chunk_size):
+                        yield _chunk
+                    return
+                _response.read()
+                if _response.status_code == 400:
+                    raise BadRequestError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                if _response.status_code == 402:
+                    raise PaymentRequiredError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                if _response.status_code == 403:
+                    raise ForbiddenError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                if _response.status_code == 500:
+                    raise InternalServerError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                if _response.status_code == 503:
+                    raise ServiceUnavailableError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                _response_json = _response.json()
+            except JSONDecodeError:
+                raise ApiError(status_code=_response.status_code, body=_response.text)
+            raise ApiError(status_code=_response.status_code, body=_response_json)
+
     def get_voices(
         self, *, token: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[ApiVoice]:
@@ -331,6 +478,7 @@ class AsyncTextToSpeechClient:
             The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
 
         voice_id : str
+            Use the GET /v1/speech/voices api to find supported voiceIds.
 
         audio_duration : typing.Optional[float]
             This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.
@@ -349,7 +497,7 @@ class AsyncTextToSpeechClient:
 
         multi_native_locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
-            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speed/voices endpoint to retrieve the list of available voices and languages.
+            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
 
         pitch : typing.Optional[int]
             Pitch of the voiceover
@@ -493,6 +641,152 @@ class AsyncTextToSpeechClient:
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def stream(
+        self,
+        *,
+        text: str,
+        voice_id: str,
+        token: typing.Optional[str] = None,
+        channel_type: typing.Optional[str] = OMIT,
+        format: typing.Optional[str] = OMIT,
+        multi_native_locale: typing.Optional[str] = OMIT,
+        pitch: typing.Optional[int] = OMIT,
+        rate: typing.Optional[int] = OMIT,
+        sample_rate: typing.Optional[float] = OMIT,
+        style: typing.Optional[str] = OMIT,
+        variation: typing.Optional[int] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.AsyncIterator[bytes]:
+        """
+        Returns a streaming output of generated audio
+
+        Parameters
+        ----------
+        text : str
+            The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
+
+        voice_id : str
+            Use the GET /v1/speech/voices api to find supported voiceIds.
+
+        token : typing.Optional[str]
+
+        channel_type : typing.Optional[str]
+            Valid values: STEREO, MONO
+
+        format : typing.Optional[str]
+            Format of the generated audio file. Valid values: MP3, WAV
+
+        multi_native_locale : typing.Optional[str]
+            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
+            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
+
+        pitch : typing.Optional[int]
+            Pitch of the voiceover
+
+        rate : typing.Optional[int]
+            Speed of the voiceover
+
+        sample_rate : typing.Optional[float]
+            Valid values are 8000, 24000, 44100, 48000
+
+        style : typing.Optional[str]
+            The voice style to be used for voiceover generation.
+
+        variation : typing.Optional[int]
+            Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
+
+        Yields
+        ------
+        typing.AsyncIterator[bytes]
+            Ok
+        """
+        async with self._client_wrapper.httpx_client.stream(
+            "v1/speech/stream",
+            method="POST",
+            json={
+                "channelType": channel_type,
+                "format": format,
+                "multiNativeLocale": multi_native_locale,
+                "pitch": pitch,
+                "rate": rate,
+                "sampleRate": sample_rate,
+                "style": style,
+                "text": text,
+                "variation": variation,
+                "voiceId": voice_id,
+            },
+            headers={
+                "content-type": "application/json",
+                "token": str(token) if token is not None else None,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        ) as _response:
+            try:
+                if 200 <= _response.status_code < 300:
+                    _chunk_size = request_options.get("chunk_size", None) if request_options is not None else None
+                    async for _chunk in _response.aiter_bytes(chunk_size=_chunk_size):
+                        yield _chunk
+                    return
+                await _response.aread()
+                if _response.status_code == 400:
+                    raise BadRequestError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                if _response.status_code == 402:
+                    raise PaymentRequiredError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                if _response.status_code == 403:
+                    raise ForbiddenError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                if _response.status_code == 500:
+                    raise InternalServerError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                if _response.status_code == 503:
+                    raise ServiceUnavailableError(
+                        typing.cast(
+                            typing.Optional[typing.Any],
+                            parse_obj_as(
+                                type_=typing.Optional[typing.Any],  # type: ignore
+                                object_=_response.json(),
+                            ),
+                        )
+                    )
+                _response_json = _response.json()
+            except JSONDecodeError:
+                raise ApiError(status_code=_response.status_code, body=_response.text)
+            raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def get_voices(
         self, *, token: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None

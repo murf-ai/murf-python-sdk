@@ -8,6 +8,7 @@ from .api_project_response_dubbing_type import ApiProjectResponseDubbingType
 from .api_voice import ApiVoice
 from .api_voice_gender import ApiVoiceGender
 from .auth_token_response import AuthTokenResponse
+from .character_count import CharacterCount
 from .dub_api_detail_response import DubApiDetailResponse
 from .dub_job_status_response import DubJobStatusResponse
 from .form_data_content_disposition import FormDataContentDisposition
@@ -15,11 +16,16 @@ from .generate_speech_response import GenerateSpeechResponse
 from .group_api_project_response import GroupApiProjectResponse
 from .locale_response import LocaleResponse
 from .locale_response_supports_item import LocaleResponseSupportsItem
+from .metadata import Metadata
+from .murf_api_translation_request import MurfApiTranslationRequest
+from .murf_api_translation_response import MurfApiTranslationResponse
 from .pronunciation_detail import PronunciationDetail
 from .pronunciation_detail_type import PronunciationDetailType
 from .source_locale_response import SourceLocaleResponse
+from .speech_to_speech_response import SpeechToSpeechResponse
 from .style_details import StyleDetails
-from .word_duration import WordDuration
+from .translation import Translation
+from .word_duration_response import WordDurationResponse
 
 __all__ = [
     "ApiJobResponse",
@@ -30,6 +36,7 @@ __all__ = [
     "ApiVoice",
     "ApiVoiceGender",
     "AuthTokenResponse",
+    "CharacterCount",
     "DubApiDetailResponse",
     "DubJobStatusResponse",
     "FormDataContentDisposition",
@@ -37,9 +44,14 @@ __all__ = [
     "GroupApiProjectResponse",
     "LocaleResponse",
     "LocaleResponseSupportsItem",
+    "Metadata",
+    "MurfApiTranslationRequest",
+    "MurfApiTranslationResponse",
     "PronunciationDetail",
     "PronunciationDetailType",
     "SourceLocaleResponse",
+    "SpeechToSpeechResponse",
     "StyleDetails",
-    "WordDuration",
+    "Translation",
+    "WordDurationResponse",
 ]

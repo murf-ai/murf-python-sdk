@@ -122,7 +122,7 @@ client.text_to_speech.generate(
 <dl>
 <dd>
 
-**voice_id:** `str` 
+**voice_id:** `str` — Use the GET /v1/speech/voices api to find supported voiceIds.
     
 </dd>
 </dl>
@@ -173,7 +173,7 @@ client.text_to_speech.generate(
 **multi_native_locale:** `typing.Optional[str]` 
 
 Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
-Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speed/voices endpoint to retrieve the list of available voices and languages.
+Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
     
 </dd>
 </dl>

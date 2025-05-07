@@ -4,19 +4,33 @@ from ..core.pydantic_utilities import UniversalBaseModel
 import typing_extensions
 import typing
 from ..core.serialization import FieldMetadata
-from ..core.pydantic_utilities import IS_PYDANTIC_V2
 import pydantic
+from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class WordDuration(UniversalBaseModel):
+class WordDurationResponse(UniversalBaseModel):
     end_ms: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="endMs")] = None
     pitch_scale_maximum: typing_extensions.Annotated[
         typing.Optional[float], FieldMetadata(alias="pitchScaleMaximum")
-    ] = None
+    ] = pydantic.Field(default=None)
+    """
+    This field has been deprecated.
+    """
+
     pitch_scale_minimum: typing_extensions.Annotated[
         typing.Optional[float], FieldMetadata(alias="pitchScaleMinimum")
-    ] = None
-    source_word_index: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="sourceWordIndex")] = None
+    ] = pydantic.Field(default=None)
+    """
+    This field has been deprecated.
+    """
+
+    source_word_index: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="sourceWordIndex")] = (
+        pydantic.Field(default=None)
+    )
+    """
+    This field has been deprecated.
+    """
+
     start_ms: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="startMs")] = None
     word: typing.Optional[str] = None
 
