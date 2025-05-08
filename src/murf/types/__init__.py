@@ -17,7 +17,6 @@ from .group_api_project_response import GroupApiProjectResponse
 from .locale_response import LocaleResponse
 from .locale_response_supports_item import LocaleResponseSupportsItem
 from .metadata import Metadata
-from .murf_api_translation_request import MurfApiTranslationRequest
 from .murf_api_translation_response import MurfApiTranslationResponse
 from .pronunciation_detail import PronunciationDetail
 from .pronunciation_detail_type import PronunciationDetailType
@@ -45,7 +44,6 @@ __all__ = [
     "LocaleResponse",
     "LocaleResponseSupportsItem",
     "Metadata",
-    "MurfApiTranslationRequest",
     "MurfApiTranslationResponse",
     "PronunciationDetail",
     "PronunciationDetailType",

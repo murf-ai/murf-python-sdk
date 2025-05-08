@@ -215,7 +215,6 @@ class TextToSpeechClient:
         *,
         text: str,
         voice_id: str,
-        token: typing.Optional[str] = None,
         channel_type: typing.Optional[str] = OMIT,
         format: typing.Optional[str] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
@@ -236,8 +235,6 @@ class TextToSpeechClient:
 
         voice_id : str
             Use the GET /v1/speech/voices api to find supported voiceIds.
-
-        token : typing.Optional[str]
 
         channel_type : typing.Optional[str]
             Valid values: STEREO, MONO
@@ -271,6 +268,15 @@ class TextToSpeechClient:
         ------
         typing.Iterator[bytes]
             Ok
+
+        Examples
+        --------
+        from murf import Murf
+
+        client = Murf(
+            api_key="YOUR_API_KEY",
+        )
+        client.text_to_speech.stream()
         """
         with self._client_wrapper.httpx_client.stream(
             "v1/speech/stream",
@@ -289,7 +295,6 @@ class TextToSpeechClient:
             },
             headers={
                 "content-type": "application/json",
-                "token": str(token) if token is not None else None,
             },
             request_options=request_options,
             omit=OMIT,
@@ -647,7 +652,6 @@ class AsyncTextToSpeechClient:
         *,
         text: str,
         voice_id: str,
-        token: typing.Optional[str] = None,
         channel_type: typing.Optional[str] = OMIT,
         format: typing.Optional[str] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
@@ -668,8 +672,6 @@ class AsyncTextToSpeechClient:
 
         voice_id : str
             Use the GET /v1/speech/voices api to find supported voiceIds.
-
-        token : typing.Optional[str]
 
         channel_type : typing.Optional[str]
             Valid values: STEREO, MONO
@@ -703,6 +705,23 @@ class AsyncTextToSpeechClient:
         ------
         typing.AsyncIterator[bytes]
             Ok
+
+        Examples
+        --------
+        import asyncio
+
+        from murf import AsyncMurf
+
+        client = AsyncMurf(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.text_to_speech.stream()
+
+
+        asyncio.run(main())
         """
         async with self._client_wrapper.httpx_client.stream(
             "v1/speech/stream",
@@ -721,7 +740,6 @@ class AsyncTextToSpeechClient:
             },
             headers={
                 "content-type": "application/json",
-                "token": str(token) if token is not None else None,
             },
             request_options=request_options,
             omit=OMIT,

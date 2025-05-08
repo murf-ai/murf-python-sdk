@@ -18,7 +18,6 @@ from .types import (
     LocaleResponse,
     LocaleResponseSupportsItem,
     Metadata,
-    MurfApiTranslationRequest,
     MurfApiTranslationResponse,
     PronunciationDetail,
     PronunciationDetailType,
@@ -36,7 +35,7 @@ from .errors import (
     ServiceUnavailableError,
     UnauthorizedError,
 )
-from . import auth, dubbing, text_to_speech
+from . import auth, dubbing, text, text_to_speech, voice_changer
 from .client import AsyncMurf, Murf
 from .dubbing_client import MurfDub
 from .environment import MurfEnvironment
@@ -67,7 +66,6 @@ __all__ = [
     "LocaleResponseSupportsItem",
     "Metadata",
     "Murf",
-    "MurfApiTranslationRequest",
     "MurfApiTranslationResponse",
     "MurfDub",
     "MurfEnvironment",
@@ -84,5 +82,7 @@ __all__ = [
     "__version__",
     "auth",
     "dubbing",
+    "text",
     "text_to_speech",
+    "voice_changer",
 ]
