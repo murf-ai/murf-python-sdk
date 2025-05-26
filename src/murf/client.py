@@ -3,6 +3,7 @@ from .environment import MurfEnvironment
 import typing
 import os
 import httpx
+from .version import __version__
 
 class Murf(BaseClient):
     """
@@ -51,6 +52,10 @@ class Murf(BaseClient):
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
     ):
+        default_params = {'origin': f'python_sdk_{__version__}'}
+        _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
+        httpx_client=httpx_client if httpx_client is not None else httpx.Client(params=default_params, timeout=_defaulted_timeout, follow_redirects=follow_redirects) if follow_redirects is not None else httpx.Client(params=default_params, timeout=_defaulted_timeout)
+
         super().__init__(
             base_url=base_url,
             environment=environment,
@@ -109,6 +114,10 @@ class AsyncMurf(AsyncBaseClient):
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
     ):
+        default_params = {'origin': f'python_sdk_{__version__}'}
+        _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
+        httpx_client=httpx_client if httpx_client is not None else httpx.AsyncClient(params=default_params, timeout=_defaulted_timeout, follow_redirects=follow_redirects) if follow_redirects is not None else httpx.AsyncClient(params=default_params, timeout=_defaulted_timeout)
+        
         super().__init__(
             base_url=base_url,
             environment=environment,
