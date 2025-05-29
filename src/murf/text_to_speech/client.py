@@ -54,7 +54,7 @@ class TextToSpeechClient:
             The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
 
         voice_id : str
-            Use the GET /v1/speech/voices api to find supported voiceIds.
+            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
 
         audio_duration : typing.Optional[float]
             This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.
@@ -234,7 +234,7 @@ class TextToSpeechClient:
             The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
 
         voice_id : str
-            Use the GET /v1/speech/voices api to find supported voiceIds.
+            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
 
         channel_type : typing.Optional[str]
             Valid values: STEREO, MONO
@@ -483,7 +483,7 @@ class AsyncTextToSpeechClient:
             The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
 
         voice_id : str
-            Use the GET /v1/speech/voices api to find supported voiceIds.
+            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
 
         audio_duration : typing.Optional[float]
             This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.
@@ -671,7 +671,7 @@ class AsyncTextToSpeechClient:
             The text that is to be synthesised. e.g. 'Hello there [pause 1s] friend'
 
         voice_id : str
-            Use the GET /v1/speech/voices api to find supported voiceIds.
+            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
 
         channel_type : typing.Optional[str]
             Valid values: STEREO, MONO

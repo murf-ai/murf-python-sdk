@@ -109,7 +109,7 @@ class VoiceChangerClient:
             Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
 
         voice_id : typing.Optional[str]
-            Use the GET /v1/speech/voices api to find supported voiceIds.
+            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -311,7 +311,7 @@ class AsyncVoiceChangerClient:
             Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
 
         voice_id : typing.Optional[str]
-            Use the GET /v1/speech/voices api to find supported voiceIds.
+            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

@@ -122,7 +122,7 @@ client.text_to_speech.generate(
 <dl>
 <dd>
 
-**voice_id:** `str` — Use the GET /v1/speech/voices api to find supported voiceIds.
+**voice_id:** `str` — Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
     
 </dd>
 </dl>
@@ -303,7 +303,7 @@ client.text_to_speech.stream()
 <dl>
 <dd>
 
-**voice_id:** `str` — Use the GET /v1/speech/voices api to find supported voiceIds.
+**voice_id:** `str` — Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
     
 </dd>
 </dl>
@@ -722,7 +722,7 @@ Example 2: '{"2022": {"type": "SAY_AS", "pronunciation": "twenty twenty two"}}'
 <dl>
 <dd>
 
-**voice_id:** `typing.Optional[str]` — Use the GET /v1/speech/voices api to find supported voiceIds.
+**voice_id:** `typing.Optional[str]` — Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
     
 </dd>
 </dl>
