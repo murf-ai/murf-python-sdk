@@ -69,8 +69,6 @@ class AsyncMurfDub(AsyncBaseClient):
 
     Parameters
     ----------
-    base_url : typing.Optional[str]
-        The base url to use for requests from the client.
 
     environment : MurfEnvironment
         The environment to use for requests from the client. from .environment import MurfEnvironment
@@ -103,7 +101,6 @@ class AsyncMurfDub(AsyncBaseClient):
     def __init__(
         self,
         *,
-        base_url: typing.Optional[str] = None,
         environment: MurfEnvironment = MurfEnvironment.DEFAULT,
         api_key: typing.Optional[str] = os.getenv("MURFDUB_API_KEY"),
         timeout: typing.Optional[float] = 60,
@@ -115,7 +112,6 @@ class AsyncMurfDub(AsyncBaseClient):
         httpx_client=httpx_client if httpx_client is not None else httpx.AsyncClient(params=default_params, timeout=_defaulted_timeout, follow_redirects=follow_redirects) if follow_redirects is not None else httpx.AsyncClient(params=default_params, timeout=_defaulted_timeout)
         
         super().__init__(
-            base_url=base_url,
             environment=environment,
             api_key=api_key,
             timeout=timeout,
