@@ -6,7 +6,7 @@ from ... import core
 from .types.jobs_create_request_priority import JobsCreateRequestPriority
 from ...core.request_options import RequestOptions
 from ...types.api_job_response import ApiJobResponse
-from ...core.pydantic_utilities import parse_obj_as
+from ...core.unchecked_base_model import construct_type
 from ...errors.bad_request_error import BadRequestError
 from ...errors.forbidden_error import ForbiddenError
 from ...errors.internal_server_error import InternalServerError
@@ -83,6 +83,7 @@ class JobsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/murfdub/jobs/create",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
                 "file_url": file_url,
@@ -103,7 +104,7 @@ class JobsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     ApiJobResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ApiJobResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -112,7 +113,7 @@ class JobsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -122,7 +123,7 @@ class JobsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -132,7 +133,7 @@ class JobsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -142,7 +143,7 @@ class JobsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -206,6 +207,7 @@ class JobsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/murfdub/jobs/create-with-project-id",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
                 "file_url": file_url,
@@ -225,7 +227,7 @@ class JobsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     ApiJobResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ApiJobResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -234,7 +236,7 @@ class JobsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -244,7 +246,7 @@ class JobsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -254,7 +256,7 @@ class JobsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -264,7 +266,7 @@ class JobsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -304,6 +306,7 @@ class JobsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v1/murfdub/jobs/{jsonable_encoder(job_id)}/status",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -311,7 +314,7 @@ class JobsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     DubJobStatusResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=DubJobStatusResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -320,7 +323,7 @@ class JobsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -330,7 +333,7 @@ class JobsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -340,7 +343,7 @@ class JobsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -350,7 +353,7 @@ class JobsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -431,6 +434,7 @@ class AsyncJobsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/murfdub/jobs/create",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
                 "file_url": file_url,
@@ -451,7 +455,7 @@ class AsyncJobsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     ApiJobResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ApiJobResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -460,7 +464,7 @@ class AsyncJobsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -470,7 +474,7 @@ class AsyncJobsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -480,7 +484,7 @@ class AsyncJobsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -490,7 +494,7 @@ class AsyncJobsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -562,6 +566,7 @@ class AsyncJobsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/murfdub/jobs/create-with-project-id",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
                 "file_url": file_url,
@@ -581,7 +586,7 @@ class AsyncJobsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     ApiJobResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ApiJobResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -590,7 +595,7 @@ class AsyncJobsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -600,7 +605,7 @@ class AsyncJobsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -610,7 +615,7 @@ class AsyncJobsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -620,7 +625,7 @@ class AsyncJobsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -668,6 +673,7 @@ class AsyncJobsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/murfdub/jobs/{jsonable_encoder(job_id)}/status",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -675,7 +681,7 @@ class AsyncJobsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     DubJobStatusResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=DubJobStatusResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -684,7 +690,7 @@ class AsyncJobsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -694,7 +700,7 @@ class AsyncJobsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -704,7 +710,7 @@ class AsyncJobsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -714,7 +720,7 @@ class AsyncJobsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),

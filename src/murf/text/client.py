@@ -4,7 +4,7 @@ import typing
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.murf_api_translation_response import MurfApiTranslationResponse
-from ..core.pydantic_utilities import parse_obj_as
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.payment_required_error import PaymentRequiredError
 from ..errors.forbidden_error import ForbiddenError
@@ -60,6 +60,7 @@ class TextClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/text/translate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "targetLanguage": target_language,
@@ -75,7 +76,7 @@ class TextClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     MurfApiTranslationResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=MurfApiTranslationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -84,7 +85,7 @@ class TextClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -94,7 +95,7 @@ class TextClient:
                 raise PaymentRequiredError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -104,7 +105,7 @@ class TextClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -114,7 +115,7 @@ class TextClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -124,7 +125,7 @@ class TextClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -186,6 +187,7 @@ class AsyncTextClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/text/translate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "targetLanguage": target_language,
@@ -201,7 +203,7 @@ class AsyncTextClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     MurfApiTranslationResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=MurfApiTranslationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -210,7 +212,7 @@ class AsyncTextClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -220,7 +222,7 @@ class AsyncTextClient:
                 raise PaymentRequiredError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -230,7 +232,7 @@ class AsyncTextClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -240,7 +242,7 @@ class AsyncTextClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -250,7 +252,7 @@ class AsyncTextClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),

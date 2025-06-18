@@ -5,7 +5,7 @@ from ...core.client_wrapper import SyncClientWrapper
 from .types.api_create_project_request_dubbing_type import ApiCreateProjectRequestDubbingType
 from ...core.request_options import RequestOptions
 from ...types.api_project_response import ApiProjectResponse
-from ...core.pydantic_utilities import parse_obj_as
+from ...core.unchecked_base_model import construct_type
 from ...errors.bad_request_error import BadRequestError
 from ...errors.forbidden_error import ForbiddenError
 from ...errors.internal_server_error import InternalServerError
@@ -73,6 +73,7 @@ class ProjectsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/murfdub/projects/create",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "name": name,
@@ -91,7 +92,7 @@ class ProjectsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     ApiProjectResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ApiProjectResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -100,7 +101,7 @@ class ProjectsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -110,7 +111,7 @@ class ProjectsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -120,7 +121,7 @@ class ProjectsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -130,7 +131,7 @@ class ProjectsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -176,6 +177,7 @@ class ProjectsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/murfdub/projects/list",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -187,7 +189,7 @@ class ProjectsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     GroupApiProjectResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GroupApiProjectResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -196,7 +198,7 @@ class ProjectsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -206,7 +208,7 @@ class ProjectsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -216,7 +218,7 @@ class ProjectsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -226,7 +228,7 @@ class ProjectsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -274,6 +276,7 @@ class ProjectsClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v1/murfdub/projects/{jsonable_encoder(project_id)}/update",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "target_locales": target_locales,
@@ -288,7 +291,7 @@ class ProjectsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     ApiProjectResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ApiProjectResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -297,7 +300,7 @@ class ProjectsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -307,7 +310,7 @@ class ProjectsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -317,7 +320,7 @@ class ProjectsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -327,7 +330,7 @@ class ProjectsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -400,6 +403,7 @@ class AsyncProjectsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/murfdub/projects/create",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "name": name,
@@ -418,7 +422,7 @@ class AsyncProjectsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     ApiProjectResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ApiProjectResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -427,7 +431,7 @@ class AsyncProjectsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -437,7 +441,7 @@ class AsyncProjectsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -447,7 +451,7 @@ class AsyncProjectsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -457,7 +461,7 @@ class AsyncProjectsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -511,6 +515,7 @@ class AsyncProjectsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/murfdub/projects/list",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             params={
                 "limit": limit,
@@ -522,7 +527,7 @@ class AsyncProjectsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     GroupApiProjectResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GroupApiProjectResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -531,7 +536,7 @@ class AsyncProjectsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -541,7 +546,7 @@ class AsyncProjectsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -551,7 +556,7 @@ class AsyncProjectsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -561,7 +566,7 @@ class AsyncProjectsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -617,6 +622,7 @@ class AsyncProjectsClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/murfdub/projects/{jsonable_encoder(project_id)}/update",
+            base_url=self._client_wrapper.get_environment().base,
             method="PUT",
             json={
                 "target_locales": target_locales,
@@ -631,7 +637,7 @@ class AsyncProjectsClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     ApiProjectResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=ApiProjectResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -640,7 +646,7 @@ class AsyncProjectsClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -650,7 +656,7 @@ class AsyncProjectsClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -660,7 +666,7 @@ class AsyncProjectsClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -670,7 +676,7 @@ class AsyncProjectsClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),

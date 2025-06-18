@@ -7,10 +7,13 @@ from .api_project_response import ApiProjectResponse
 from .api_project_response_dubbing_type import ApiProjectResponseDubbingType
 from .api_voice import ApiVoice
 from .api_voice_gender import ApiVoiceGender
+from .audio_output import AudioOutput
 from .auth_token_response import AuthTokenResponse
 from .character_count import CharacterCount
+from .clear_context import ClearContext
 from .dub_api_detail_response import DubApiDetailResponse
 from .dub_job_status_response import DubJobStatusResponse
+from .final_output import FinalOutput
 from .form_data_content_disposition import FormDataContentDisposition
 from .generate_speech_response import GenerateSpeechResponse
 from .group_api_project_response import GroupApiProjectResponse
@@ -20,10 +23,28 @@ from .metadata import Metadata
 from .murf_api_translation_response import MurfApiTranslationResponse
 from .pronunciation_detail import PronunciationDetail
 from .pronunciation_detail_type import PronunciationDetailType
+from .send_text import SendText
+from .set_advanced_settings import SetAdvancedSettings
+from .set_voice_configuration import SetVoiceConfiguration
+from .set_voice_configuration_voice_config import SetVoiceConfigurationVoiceConfig
+from .set_voice_configuration_voice_config_pronunciation_dictionary_value import (
+    SetVoiceConfigurationVoiceConfigPronunciationDictionaryValue,
+)
+from .set_voice_configuration_voice_config_pronunciation_dictionary_value_type import (
+    SetVoiceConfigurationVoiceConfigPronunciationDictionaryValueType,
+)
 from .source_locale_response import SourceLocaleResponse
 from .speech_to_speech_response import SpeechToSpeechResponse
 from .style_details import StyleDetails
 from .translation import Translation
+from .tts_request_both_payload import TtsRequestBothPayload
+from .tts_request_both_payload_voice_config import TtsRequestBothPayloadVoiceConfig
+from .tts_request_both_payload_voice_config_pronunciation_dictionary import (
+    TtsRequestBothPayloadVoiceConfigPronunciationDictionary,
+)
+from .tts_request_both_payload_voice_config_pronunciation_dictionary_guess import (
+    TtsRequestBothPayloadVoiceConfigPronunciationDictionaryGuess,
+)
 from .word_duration_response import WordDurationResponse
 
 __all__ = [
@@ -34,10 +55,13 @@ __all__ = [
     "ApiProjectResponseDubbingType",
     "ApiVoice",
     "ApiVoiceGender",
+    "AudioOutput",
     "AuthTokenResponse",
     "CharacterCount",
+    "ClearContext",
     "DubApiDetailResponse",
     "DubJobStatusResponse",
+    "FinalOutput",
     "FormDataContentDisposition",
     "GenerateSpeechResponse",
     "GroupApiProjectResponse",
@@ -47,9 +71,19 @@ __all__ = [
     "MurfApiTranslationResponse",
     "PronunciationDetail",
     "PronunciationDetailType",
+    "SendText",
+    "SetAdvancedSettings",
+    "SetVoiceConfiguration",
+    "SetVoiceConfigurationVoiceConfig",
+    "SetVoiceConfigurationVoiceConfigPronunciationDictionaryValue",
+    "SetVoiceConfigurationVoiceConfigPronunciationDictionaryValueType",
     "SourceLocaleResponse",
     "SpeechToSpeechResponse",
     "StyleDetails",
     "Translation",
+    "TtsRequestBothPayload",
+    "TtsRequestBothPayloadVoiceConfig",
+    "TtsRequestBothPayloadVoiceConfigPronunciationDictionary",
+    "TtsRequestBothPayloadVoiceConfigPronunciationDictionaryGuess",
     "WordDurationResponse",
 ]

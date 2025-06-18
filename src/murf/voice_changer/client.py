@@ -5,7 +5,7 @@ from ..core.client_wrapper import SyncClientWrapper
 from .. import core
 from ..core.request_options import RequestOptions
 from ..types.speech_to_speech_response import SpeechToSpeechResponse
-from ..core.pydantic_utilities import parse_obj_as
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.payment_required_error import PaymentRequiredError
 from ..errors.forbidden_error import ForbiddenError
@@ -130,6 +130,7 @@ class VoiceChangerClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/voice-changer/convert",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
                 "audio_duration": audio_duration,
@@ -160,7 +161,7 @@ class VoiceChangerClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     SpeechToSpeechResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SpeechToSpeechResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -169,7 +170,7 @@ class VoiceChangerClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -179,7 +180,7 @@ class VoiceChangerClient:
                 raise PaymentRequiredError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -189,7 +190,7 @@ class VoiceChangerClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -199,7 +200,7 @@ class VoiceChangerClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -209,7 +210,7 @@ class VoiceChangerClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -340,6 +341,7 @@ class AsyncVoiceChangerClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/voice-changer/convert",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             data={
                 "audio_duration": audio_duration,
@@ -370,7 +372,7 @@ class AsyncVoiceChangerClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     SpeechToSpeechResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=SpeechToSpeechResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -379,7 +381,7 @@ class AsyncVoiceChangerClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -389,7 +391,7 @@ class AsyncVoiceChangerClient:
                 raise PaymentRequiredError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -399,7 +401,7 @@ class AsyncVoiceChangerClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -409,7 +411,7 @@ class AsyncVoiceChangerClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -419,7 +421,7 @@ class AsyncVoiceChangerClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),

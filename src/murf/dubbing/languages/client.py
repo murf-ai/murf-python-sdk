@@ -4,7 +4,7 @@ from ...core.client_wrapper import SyncClientWrapper
 import typing
 from ...core.request_options import RequestOptions
 from ...types.locale_response import LocaleResponse
-from ...core.pydantic_utilities import parse_obj_as
+from ...core.unchecked_base_model import construct_type
 from ...errors.bad_request_error import BadRequestError
 from ...errors.forbidden_error import ForbiddenError
 from ...errors.internal_server_error import InternalServerError
@@ -44,6 +44,7 @@ class LanguagesClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/murfdub/list-destination-languages",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -51,7 +52,7 @@ class LanguagesClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     typing.List[LocaleResponse],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[LocaleResponse],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -60,7 +61,7 @@ class LanguagesClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -70,7 +71,7 @@ class LanguagesClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -80,7 +81,7 @@ class LanguagesClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -90,7 +91,7 @@ class LanguagesClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -126,6 +127,7 @@ class LanguagesClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/murfdub/list-source-languages",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -133,7 +135,7 @@ class LanguagesClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     typing.List[SourceLocaleResponse],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[SourceLocaleResponse],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -142,7 +144,7 @@ class LanguagesClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -152,7 +154,7 @@ class LanguagesClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -162,7 +164,7 @@ class LanguagesClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -172,7 +174,7 @@ class LanguagesClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -221,6 +223,7 @@ class AsyncLanguagesClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/murfdub/list-destination-languages",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -228,7 +231,7 @@ class AsyncLanguagesClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     typing.List[LocaleResponse],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[LocaleResponse],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -237,7 +240,7 @@ class AsyncLanguagesClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -247,7 +250,7 @@ class AsyncLanguagesClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -257,7 +260,7 @@ class AsyncLanguagesClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -267,7 +270,7 @@ class AsyncLanguagesClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -311,6 +314,7 @@ class AsyncLanguagesClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/murfdub/list-source-languages",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -318,7 +322,7 @@ class AsyncLanguagesClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     typing.List[SourceLocaleResponse],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[SourceLocaleResponse],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -327,7 +331,7 @@ class AsyncLanguagesClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -337,7 +341,7 @@ class AsyncLanguagesClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -347,7 +351,7 @@ class AsyncLanguagesClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -357,7 +361,7 @@ class AsyncLanguagesClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),

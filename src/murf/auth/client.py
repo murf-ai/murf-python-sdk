@@ -4,7 +4,7 @@ from ..core.client_wrapper import SyncClientWrapper
 import typing
 from ..core.request_options import RequestOptions
 from ..types.auth_token_response import AuthTokenResponse
-from ..core.pydantic_utilities import parse_obj_as
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..errors.service_unavailable_error import ServiceUnavailableError
@@ -42,6 +42,7 @@ class AuthClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/auth/token",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -49,7 +50,7 @@ class AuthClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     AuthTokenResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=AuthTokenResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -58,7 +59,7 @@ class AuthClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -68,7 +69,7 @@ class AuthClient:
                 raise UnauthorizedError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -78,7 +79,7 @@ class AuthClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -127,6 +128,7 @@ class AsyncAuthClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/auth/token",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             request_options=request_options,
         )
@@ -134,7 +136,7 @@ class AsyncAuthClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     AuthTokenResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=AuthTokenResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -143,7 +145,7 @@ class AsyncAuthClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -153,7 +155,7 @@ class AsyncAuthClient:
                 raise UnauthorizedError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -163,7 +165,7 @@ class AsyncAuthClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),

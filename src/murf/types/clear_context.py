@@ -6,9 +6,9 @@ import typing
 import pydantic
 
 
-class SourceLocaleResponse(UncheckedBaseModel):
-    locale: str
-    language: str
+class ClearContext(UncheckedBaseModel):
+    clear: bool
+    context_id: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

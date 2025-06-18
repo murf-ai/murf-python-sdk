@@ -7,7 +7,7 @@ from ..types.pronunciation_detail import PronunciationDetail
 from ..core.request_options import RequestOptions
 from ..types.generate_speech_response import GenerateSpeechResponse
 from ..core.serialization import convert_and_respect_annotation_metadata
-from ..core.pydantic_utilities import parse_obj_as
+from ..core.unchecked_base_model import construct_type
 from ..errors.bad_request_error import BadRequestError
 from ..errors.payment_required_error import PaymentRequiredError
 from ..errors.forbidden_error import ForbiddenError
@@ -119,6 +119,7 @@ class TextToSpeechClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/speech/generate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "audioDuration": audio_duration,
@@ -150,7 +151,7 @@ class TextToSpeechClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     GenerateSpeechResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GenerateSpeechResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -159,7 +160,7 @@ class TextToSpeechClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -169,7 +170,7 @@ class TextToSpeechClient:
                 raise PaymentRequiredError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -179,7 +180,7 @@ class TextToSpeechClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -189,7 +190,7 @@ class TextToSpeechClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -199,7 +200,7 @@ class TextToSpeechClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -280,6 +281,7 @@ class TextToSpeechClient:
         """
         with self._client_wrapper.httpx_client.stream(
             "v1/speech/stream",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "channelType": channel_type,
@@ -310,7 +312,7 @@ class TextToSpeechClient:
                     raise BadRequestError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -320,7 +322,7 @@ class TextToSpeechClient:
                     raise PaymentRequiredError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -330,7 +332,7 @@ class TextToSpeechClient:
                     raise ForbiddenError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -340,7 +342,7 @@ class TextToSpeechClient:
                     raise InternalServerError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -350,7 +352,7 @@ class TextToSpeechClient:
                     raise ServiceUnavailableError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -390,6 +392,7 @@ class TextToSpeechClient:
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/speech/voices",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             headers={
                 "token": str(token) if token is not None else None,
@@ -400,7 +403,7 @@ class TextToSpeechClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     typing.List[ApiVoice],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[ApiVoice],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -409,7 +412,7 @@ class TextToSpeechClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -419,7 +422,7 @@ class TextToSpeechClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -429,7 +432,7 @@ class TextToSpeechClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -439,7 +442,7 @@ class TextToSpeechClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -556,6 +559,7 @@ class AsyncTextToSpeechClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/speech/generate",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "audioDuration": audio_duration,
@@ -587,7 +591,7 @@ class AsyncTextToSpeechClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     GenerateSpeechResponse,
-                    parse_obj_as(
+                    construct_type(
                         type_=GenerateSpeechResponse,  # type: ignore
                         object_=_response.json(),
                     ),
@@ -596,7 +600,7 @@ class AsyncTextToSpeechClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -606,7 +610,7 @@ class AsyncTextToSpeechClient:
                 raise PaymentRequiredError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -616,7 +620,7 @@ class AsyncTextToSpeechClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -626,7 +630,7 @@ class AsyncTextToSpeechClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -636,7 +640,7 @@ class AsyncTextToSpeechClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -725,6 +729,7 @@ class AsyncTextToSpeechClient:
         """
         async with self._client_wrapper.httpx_client.stream(
             "v1/speech/stream",
+            base_url=self._client_wrapper.get_environment().base,
             method="POST",
             json={
                 "channelType": channel_type,
@@ -755,7 +760,7 @@ class AsyncTextToSpeechClient:
                     raise BadRequestError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -765,7 +770,7 @@ class AsyncTextToSpeechClient:
                     raise PaymentRequiredError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -775,7 +780,7 @@ class AsyncTextToSpeechClient:
                     raise ForbiddenError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -785,7 +790,7 @@ class AsyncTextToSpeechClient:
                     raise InternalServerError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -795,7 +800,7 @@ class AsyncTextToSpeechClient:
                     raise ServiceUnavailableError(
                         typing.cast(
                             typing.Optional[typing.Any],
-                            parse_obj_as(
+                            construct_type(
                                 type_=typing.Optional[typing.Any],  # type: ignore
                                 object_=_response.json(),
                             ),
@@ -843,6 +848,7 @@ class AsyncTextToSpeechClient:
         """
         _response = await self._client_wrapper.httpx_client.request(
             "v1/speech/voices",
+            base_url=self._client_wrapper.get_environment().base,
             method="GET",
             headers={
                 "token": str(token) if token is not None else None,
@@ -853,7 +859,7 @@ class AsyncTextToSpeechClient:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
                     typing.List[ApiVoice],
-                    parse_obj_as(
+                    construct_type(
                         type_=typing.List[ApiVoice],  # type: ignore
                         object_=_response.json(),
                     ),
@@ -862,7 +868,7 @@ class AsyncTextToSpeechClient:
                 raise BadRequestError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -872,7 +878,7 @@ class AsyncTextToSpeechClient:
                 raise ForbiddenError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -882,7 +888,7 @@ class AsyncTextToSpeechClient:
                 raise InternalServerError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
@@ -892,7 +898,7 @@ class AsyncTextToSpeechClient:
                 raise ServiceUnavailableError(
                     typing.cast(
                         typing.Optional[typing.Any],
-                        parse_obj_as(
+                        construct_type(
                             type_=typing.Optional[typing.Any],  # type: ignore
                             object_=_response.json(),
                         ),
