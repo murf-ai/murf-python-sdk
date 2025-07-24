@@ -3,6 +3,7 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import pydantic
 import typing
+from .send_text_voice_config import SendTextVoiceConfig
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
@@ -21,6 +22,8 @@ class SendText(UncheckedBaseModel):
     """
     Indicates if this is the end of the text stream (optional)
     """
+
+    voice_config: typing.Optional[SendTextVoiceConfig] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

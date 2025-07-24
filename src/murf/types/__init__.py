@@ -24,14 +24,21 @@ from .murf_api_translation_response import MurfApiTranslationResponse
 from .pronunciation_detail import PronunciationDetail
 from .pronunciation_detail_type import PronunciationDetailType
 from .send_text import SendText
-from .set_advanced_settings import SetAdvancedSettings
-from .set_voice_configuration import SetVoiceConfiguration
-from .set_voice_configuration_voice_config import SetVoiceConfigurationVoiceConfig
-from .set_voice_configuration_voice_config_pronunciation_dictionary_value import (
-    SetVoiceConfigurationVoiceConfigPronunciationDictionaryValue,
+from .send_text_voice_config import SendTextVoiceConfig
+from .send_text_voice_config_pronunciation_dictionary_value import SendTextVoiceConfigPronunciationDictionaryValue
+from .send_text_voice_config_pronunciation_dictionary_value_type import (
+    SendTextVoiceConfigPronunciationDictionaryValueType,
 )
-from .set_voice_configuration_voice_config_pronunciation_dictionary_value_type import (
-    SetVoiceConfigurationVoiceConfigPronunciationDictionaryValueType,
+from .set_advanced_settings import SetAdvancedSettings
+from .set_voice_configuration_or_initialize_context import SetVoiceConfigurationOrInitializeContext
+from .set_voice_configuration_or_initialize_context_voice_config import (
+    SetVoiceConfigurationOrInitializeContextVoiceConfig,
+)
+from .set_voice_configuration_or_initialize_context_voice_config_pronunciation_dictionary_value import (
+    SetVoiceConfigurationOrInitializeContextVoiceConfigPronunciationDictionaryValue,
+)
+from .set_voice_configuration_or_initialize_context_voice_config_pronunciation_dictionary_value_type import (
+    SetVoiceConfigurationOrInitializeContextVoiceConfigPronunciationDictionaryValueType,
 )
 from .source_locale_response import SourceLocaleResponse
 from .speech_to_speech_response import SpeechToSpeechResponse
@@ -72,11 +79,14 @@ __all__ = [
     "PronunciationDetail",
     "PronunciationDetailType",
     "SendText",
+    "SendTextVoiceConfig",
+    "SendTextVoiceConfigPronunciationDictionaryValue",
+    "SendTextVoiceConfigPronunciationDictionaryValueType",
     "SetAdvancedSettings",
-    "SetVoiceConfiguration",
-    "SetVoiceConfigurationVoiceConfig",
-    "SetVoiceConfigurationVoiceConfigPronunciationDictionaryValue",
-    "SetVoiceConfigurationVoiceConfigPronunciationDictionaryValueType",
+    "SetVoiceConfigurationOrInitializeContext",
+    "SetVoiceConfigurationOrInitializeContextVoiceConfig",
+    "SetVoiceConfigurationOrInitializeContextVoiceConfigPronunciationDictionaryValue",
+    "SetVoiceConfigurationOrInitializeContextVoiceConfigPronunciationDictionaryValueType",
     "SourceLocaleResponse",
     "SpeechToSpeechResponse",
     "StyleDetails",

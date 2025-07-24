@@ -43,6 +43,7 @@ class TextToSpeechClient:
         sample_rate: typing.Optional[float] = OMIT,
         style: typing.Optional[str] = OMIT,
         variation: typing.Optional[int] = OMIT,
+        word_durations_as_original_text: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GenerateSpeechResponse:
         """
@@ -66,7 +67,7 @@ class TextToSpeechClient:
             Set to true to receive audio in response as a Base64 encoded string instead of a url.
 
         format : typing.Optional[str]
-            Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW
+            Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW, PCM, OGG
 
         model_version : typing.Optional[GenerateSpeechRequestModelVersion]
             Valid values: GEN1, GEN2. Use GEN2 to generate audio using new and advanced model. Outputs from Gen 2 will sound better, but different from the old model
@@ -96,6 +97,9 @@ class TextToSpeechClient:
 
         variation : typing.Optional[int]
             Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
+
+        word_durations_as_original_text : typing.Optional[bool]
+            If set to true, the word durations in response will return words as the original input text. (English only)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -140,6 +144,7 @@ class TextToSpeechClient:
                 "text": text,
                 "variation": variation,
                 "voiceId": voice_id,
+                "wordDurationsAsOriginalText": word_durations_as_original_text,
             },
             headers={
                 "content-type": "application/json",
@@ -220,6 +225,7 @@ class TextToSpeechClient:
         format: typing.Optional[str] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
         pitch: typing.Optional[int] = OMIT,
+        pronunciation_dictionary: typing.Optional[typing.Dict[str, PronunciationDetail]] = OMIT,
         rate: typing.Optional[int] = OMIT,
         sample_rate: typing.Optional[float] = OMIT,
         style: typing.Optional[str] = OMIT,
@@ -241,7 +247,7 @@ class TextToSpeechClient:
             Valid values: STEREO, MONO
 
         format : typing.Optional[str]
-            Format of the generated audio file. Valid values: MP3, WAV
+            Format of the generated audio file. Valid values: MP3, WAV, PCM
 
         multi_native_locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
@@ -249,6 +255,13 @@ class TextToSpeechClient:
 
         pitch : typing.Optional[int]
             Pitch of the voiceover
+
+        pronunciation_dictionary : typing.Optional[typing.Dict[str, PronunciationDetail]]
+            An object used to define custom pronunciations.
+
+             Example 1: {"live":{"type": "IPA", "pronunciation": "laɪv"}}.
+
+             Example 2: {"2022":{"type": "SAY_AS", "pronunciation": "twenty twenty two"}}
 
         rate : typing.Optional[int]
             Speed of the voiceover
@@ -288,6 +301,11 @@ class TextToSpeechClient:
                 "format": format,
                 "multiNativeLocale": multi_native_locale,
                 "pitch": pitch,
+                "pronunciationDictionary": convert_and_respect_annotation_metadata(
+                    object_=pronunciation_dictionary,
+                    annotation=typing.Dict[str, PronunciationDetail],
+                    direction="write",
+                ),
                 "rate": rate,
                 "sampleRate": sample_rate,
                 "style": style,
@@ -475,6 +493,7 @@ class AsyncTextToSpeechClient:
         sample_rate: typing.Optional[float] = OMIT,
         style: typing.Optional[str] = OMIT,
         variation: typing.Optional[int] = OMIT,
+        word_durations_as_original_text: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GenerateSpeechResponse:
         """
@@ -498,7 +517,7 @@ class AsyncTextToSpeechClient:
             Set to true to receive audio in response as a Base64 encoded string instead of a url.
 
         format : typing.Optional[str]
-            Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW
+            Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW, PCM, OGG
 
         model_version : typing.Optional[GenerateSpeechRequestModelVersion]
             Valid values: GEN1, GEN2. Use GEN2 to generate audio using new and advanced model. Outputs from Gen 2 will sound better, but different from the old model
@@ -528,6 +547,9 @@ class AsyncTextToSpeechClient:
 
         variation : typing.Optional[int]
             Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
+
+        word_durations_as_original_text : typing.Optional[bool]
+            If set to true, the word durations in response will return words as the original input text. (English only)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -580,6 +602,7 @@ class AsyncTextToSpeechClient:
                 "text": text,
                 "variation": variation,
                 "voiceId": voice_id,
+                "wordDurationsAsOriginalText": word_durations_as_original_text,
             },
             headers={
                 "content-type": "application/json",
@@ -660,6 +683,7 @@ class AsyncTextToSpeechClient:
         format: typing.Optional[str] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
         pitch: typing.Optional[int] = OMIT,
+        pronunciation_dictionary: typing.Optional[typing.Dict[str, PronunciationDetail]] = OMIT,
         rate: typing.Optional[int] = OMIT,
         sample_rate: typing.Optional[float] = OMIT,
         style: typing.Optional[str] = OMIT,
@@ -681,7 +705,7 @@ class AsyncTextToSpeechClient:
             Valid values: STEREO, MONO
 
         format : typing.Optional[str]
-            Format of the generated audio file. Valid values: MP3, WAV
+            Format of the generated audio file. Valid values: MP3, WAV, PCM
 
         multi_native_locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
@@ -689,6 +713,13 @@ class AsyncTextToSpeechClient:
 
         pitch : typing.Optional[int]
             Pitch of the voiceover
+
+        pronunciation_dictionary : typing.Optional[typing.Dict[str, PronunciationDetail]]
+            An object used to define custom pronunciations.
+
+             Example 1: {"live":{"type": "IPA", "pronunciation": "laɪv"}}.
+
+             Example 2: {"2022":{"type": "SAY_AS", "pronunciation": "twenty twenty two"}}
 
         rate : typing.Optional[int]
             Speed of the voiceover
@@ -736,6 +767,11 @@ class AsyncTextToSpeechClient:
                 "format": format,
                 "multiNativeLocale": multi_native_locale,
                 "pitch": pitch,
+                "pronunciationDictionary": convert_and_respect_annotation_metadata(
+                    object_=pronunciation_dictionary,
+                    annotation=typing.Dict[str, PronunciationDetail],
+                    direction="write",
+                ),
                 "rate": rate,
                 "sampleRate": sample_rate,
                 "style": style,

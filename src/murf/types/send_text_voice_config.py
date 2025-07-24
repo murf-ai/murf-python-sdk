@@ -3,13 +3,11 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
 import pydantic
-from .set_voice_configuration_voice_config_pronunciation_dictionary_value import (
-    SetVoiceConfigurationVoiceConfigPronunciationDictionaryValue,
-)
+from .send_text_voice_config_pronunciation_dictionary_value import SendTextVoiceConfigPronunciationDictionaryValue
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
-class SetVoiceConfigurationVoiceConfig(UncheckedBaseModel):
+class SendTextVoiceConfig(UncheckedBaseModel):
     voice_id: typing.Optional[str] = pydantic.Field(default=None)
     """
     Voice ID to use for TTS. Defaults to "en-US-daniel"
@@ -30,9 +28,9 @@ class SetVoiceConfigurationVoiceConfig(UncheckedBaseModel):
     Speech pitch (optional)
     """
 
-    pronunciation_dictionary: typing.Optional[
-        typing.Dict[str, SetVoiceConfigurationVoiceConfigPronunciationDictionaryValue]
-    ] = pydantic.Field(default=None)
+    pronunciation_dictionary: typing.Optional[typing.Dict[str, SendTextVoiceConfigPronunciationDictionaryValue]] = (
+        pydantic.Field(default=None)
+    )
     """
     A map of words to their pronunciation details. Example 1: {"live":{"type": "IPA", "pronunciation": "laɪv"}}.
     """

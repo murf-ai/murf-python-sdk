@@ -7,7 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
 
 class FinalOutput(UncheckedBaseModel):
-    is_final: bool = pydantic.Field()
+    final: bool = pydantic.Field()
     """
     Indicates if the audio is final, you will not receive audio param in this message
     """

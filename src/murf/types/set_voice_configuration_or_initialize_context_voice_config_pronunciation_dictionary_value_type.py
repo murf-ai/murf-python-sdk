@@ -2,6 +2,6 @@
 
 import typing
 
-SetVoiceConfigurationVoiceConfigPronunciationDictionaryValueType = typing.Union[
+SetVoiceConfigurationOrInitializeContextVoiceConfigPronunciationDictionaryValueType = typing.Union[
     typing.Literal["IPA", "SAY_AS"], typing.Any
 ]

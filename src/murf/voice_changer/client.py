@@ -26,6 +26,7 @@ class VoiceChangerClient:
     def convert(
         self,
         *,
+        voice_id: str,
         audio_duration: typing.Optional[float] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         encode_output_as_base_64: typing.Optional[bool] = OMIT,
@@ -43,7 +44,6 @@ class VoiceChangerClient:
         style: typing.Optional[str] = OMIT,
         transcription: typing.Optional[str] = OMIT,
         variation: typing.Optional[int] = OMIT,
-        voice_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SpeechToSpeechResponse:
         """
@@ -51,6 +51,9 @@ class VoiceChangerClient:
 
         Parameters
         ----------
+        voice_id : str
+            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
+
         audio_duration : typing.Optional[float]
             This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.
 
@@ -108,9 +111,6 @@ class VoiceChangerClient:
         variation : typing.Optional[int]
             Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
 
-        voice_id : typing.Optional[str]
-            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -126,7 +126,9 @@ class VoiceChangerClient:
         client = Murf(
             api_key="YOUR_API_KEY",
         )
-        client.voice_changer.convert()
+        client.voice_changer.convert(
+            voice_id="voice_id",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/voice-changer/convert",
@@ -229,6 +231,7 @@ class AsyncVoiceChangerClient:
     async def convert(
         self,
         *,
+        voice_id: str,
         audio_duration: typing.Optional[float] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         encode_output_as_base_64: typing.Optional[bool] = OMIT,
@@ -246,7 +249,6 @@ class AsyncVoiceChangerClient:
         style: typing.Optional[str] = OMIT,
         transcription: typing.Optional[str] = OMIT,
         variation: typing.Optional[int] = OMIT,
-        voice_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SpeechToSpeechResponse:
         """
@@ -254,6 +256,9 @@ class AsyncVoiceChangerClient:
 
         Parameters
         ----------
+        voice_id : str
+            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
+
         audio_duration : typing.Optional[float]
             This parameter allows specifying the duration (in seconds) for the generated audio. If the value is 0, this parameter will be ignored. Only available for Gen2 model.
 
@@ -311,9 +316,6 @@ class AsyncVoiceChangerClient:
         variation : typing.Optional[int]
             Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
 
-        voice_id : typing.Optional[str]
-            Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -334,7 +336,9 @@ class AsyncVoiceChangerClient:
 
 
         async def main() -> None:
-            await client.voice_changer.convert()
+            await client.voice_changer.convert(
+                voice_id="voice_id",
+            )
 
 
         asyncio.run(main())

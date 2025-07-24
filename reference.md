@@ -154,7 +154,7 @@ client.text_to_speech.generate(
 <dl>
 <dd>
 
-**format:** `typing.Optional[str]` — Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW
+**format:** `typing.Optional[str]` — Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW, PCM, OGG
     
 </dd>
 </dl>
@@ -228,6 +228,14 @@ An object used to define custom pronunciations.
 <dd>
 
 **variation:** `typing.Optional[int]` — Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**word_durations_as_original_text:** `typing.Optional[bool]` — If set to true, the word durations in response will return words as the original input text. (English only)
     
 </dd>
 </dl>
@@ -319,7 +327,7 @@ client.text_to_speech.stream()
 <dl>
 <dd>
 
-**format:** `typing.Optional[str]` — Format of the generated audio file. Valid values: MP3, WAV
+**format:** `typing.Optional[str]` — Format of the generated audio file. Valid values: MP3, WAV, PCM
     
 </dd>
 </dl>
@@ -339,6 +347,20 @@ Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endp
 <dd>
 
 **pitch:** `typing.Optional[int]` — Pitch of the voiceover
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pronunciation_dictionary:** `typing.Optional[typing.Dict[str, PronunciationDetail]]` 
+
+An object used to define custom pronunciations. 
+
+ Example 1: {"live":{"type": "IPA", "pronunciation": "laɪv"}}. 
+
+ Example 2: {"2022":{"type": "SAY_AS", "pronunciation": "twenty twenty two"}}
     
 </dd>
 </dl>
@@ -557,7 +579,9 @@ from murf import Murf
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.voice_changer.convert()
+client.voice_changer.convert(
+    voice_id="voice_id",
+)
 
 ```
 </dd>
@@ -569,6 +593,14 @@ client.voice_changer.convert()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**voice_id:** `str` — Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -715,14 +747,6 @@ Example 2: '{"2022": {"type": "SAY_AS", "pronunciation": "twenty twenty two"}}'
 <dd>
 
 **variation:** `typing.Optional[int]` — Higher values will add more variation in terms of Pause, Pitch, and Speed to the voice. Only available for Gen2 model.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**voice_id:** `typing.Optional[str]` — Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
     
 </dd>
 </dl>
