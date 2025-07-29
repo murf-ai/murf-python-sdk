@@ -154,6 +154,14 @@ client.text_to_speech.generate(
 <dl>
 <dd>
 
+**encoded_as_base_64_with_zero_retention:** `typing.Optional[bool]` — Set to true to receive audio in response as a Base64 encoded string with zero data retention
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **format:** `typing.Optional[str]` — Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW, PCM, OGG
     
 </dd>

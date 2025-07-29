@@ -34,6 +34,7 @@ class TextToSpeechClient:
         audio_duration: typing.Optional[float] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         encode_as_base_64: typing.Optional[bool] = OMIT,
+        encoded_as_base_64_with_zero_retention: typing.Optional[bool] = OMIT,
         format: typing.Optional[str] = OMIT,
         model_version: typing.Optional[GenerateSpeechRequestModelVersion] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
@@ -65,6 +66,9 @@ class TextToSpeechClient:
 
         encode_as_base_64 : typing.Optional[bool]
             Set to true to receive audio in response as a Base64 encoded string instead of a url.
+
+        encoded_as_base_64_with_zero_retention : typing.Optional[bool]
+            Set to true to receive audio in response as a Base64 encoded string with zero data retention
 
         format : typing.Optional[str]
             Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW, PCM, OGG
@@ -129,6 +133,7 @@ class TextToSpeechClient:
                 "audioDuration": audio_duration,
                 "channelType": channel_type,
                 "encodeAsBase64": encode_as_base_64,
+                "encodedAsBase64WithZeroRetention": encoded_as_base_64_with_zero_retention,
                 "format": format,
                 "modelVersion": model_version,
                 "multiNativeLocale": multi_native_locale,
@@ -484,6 +489,7 @@ class AsyncTextToSpeechClient:
         audio_duration: typing.Optional[float] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         encode_as_base_64: typing.Optional[bool] = OMIT,
+        encoded_as_base_64_with_zero_retention: typing.Optional[bool] = OMIT,
         format: typing.Optional[str] = OMIT,
         model_version: typing.Optional[GenerateSpeechRequestModelVersion] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
@@ -515,6 +521,9 @@ class AsyncTextToSpeechClient:
 
         encode_as_base_64 : typing.Optional[bool]
             Set to true to receive audio in response as a Base64 encoded string instead of a url.
+
+        encoded_as_base_64_with_zero_retention : typing.Optional[bool]
+            Set to true to receive audio in response as a Base64 encoded string with zero data retention
 
         format : typing.Optional[str]
             Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW, PCM, OGG
@@ -587,6 +596,7 @@ class AsyncTextToSpeechClient:
                 "audioDuration": audio_duration,
                 "channelType": channel_type,
                 "encodeAsBase64": encode_as_base_64,
+                "encodedAsBase64WithZeroRetention": encoded_as_base_64_with_zero_retention,
                 "format": format,
                 "modelVersion": model_version,
                 "multiNativeLocale": multi_native_locale,
