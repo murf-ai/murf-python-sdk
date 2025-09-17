@@ -2,7 +2,6 @@
 
 import typing
 from ..core.client_wrapper import SyncClientWrapper
-from .types.generate_speech_request_model_version import GenerateSpeechRequestModelVersion
 from ..types.pronunciation_detail import PronunciationDetail
 from ..core.request_options import RequestOptions
 from ..types.generate_speech_response import GenerateSpeechResponse
@@ -34,9 +33,8 @@ class TextToSpeechClient:
         audio_duration: typing.Optional[float] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         encode_as_base_64: typing.Optional[bool] = OMIT,
-        encoded_as_base_64_with_zero_retention: typing.Optional[bool] = OMIT,
         format: typing.Optional[str] = OMIT,
-        model_version: typing.Optional[GenerateSpeechRequestModelVersion] = OMIT,
+        model_version: typing.Optional[typing.Literal["GEN2"]] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
         pitch: typing.Optional[int] = OMIT,
         pronunciation_dictionary: typing.Optional[typing.Dict[str, PronunciationDetail]] = OMIT,
@@ -65,16 +63,13 @@ class TextToSpeechClient:
             Valid values: STEREO, MONO
 
         encode_as_base_64 : typing.Optional[bool]
-            Set to true to receive audio in response as a Base64 encoded string instead of a url.
-
-        encoded_as_base_64_with_zero_retention : typing.Optional[bool]
-            Set to true to receive audio in response as a Base64 encoded string with zero data retention
+            Set to true to receive audio in response as a Base64 encoded string instead of a url. This enables zero retention of audio data on Murf's servers.
 
         format : typing.Optional[str]
             Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW, PCM, OGG
 
-        model_version : typing.Optional[GenerateSpeechRequestModelVersion]
-            Valid values: GEN1, GEN2. Use GEN2 to generate audio using new and advanced model. Outputs from Gen 2 will sound better, but different from the old model
+        model_version : typing.Optional[typing.Literal["GEN2"]]
+            Valid values: GEN2. Audio will be generated using the new and advanced GEN2 model. Outputs from GEN2 sound more natural and high-quality compared to earlier models.
 
         multi_native_locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
@@ -133,7 +128,6 @@ class TextToSpeechClient:
                 "audioDuration": audio_duration,
                 "channelType": channel_type,
                 "encodeAsBase64": encode_as_base_64,
-                "encodedAsBase64WithZeroRetention": encoded_as_base_64_with_zero_retention,
                 "format": format,
                 "modelVersion": model_version,
                 "multiNativeLocale": multi_native_locale,
@@ -489,9 +483,8 @@ class AsyncTextToSpeechClient:
         audio_duration: typing.Optional[float] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         encode_as_base_64: typing.Optional[bool] = OMIT,
-        encoded_as_base_64_with_zero_retention: typing.Optional[bool] = OMIT,
         format: typing.Optional[str] = OMIT,
-        model_version: typing.Optional[GenerateSpeechRequestModelVersion] = OMIT,
+        model_version: typing.Optional[typing.Literal["GEN2"]] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
         pitch: typing.Optional[int] = OMIT,
         pronunciation_dictionary: typing.Optional[typing.Dict[str, PronunciationDetail]] = OMIT,
@@ -520,16 +513,13 @@ class AsyncTextToSpeechClient:
             Valid values: STEREO, MONO
 
         encode_as_base_64 : typing.Optional[bool]
-            Set to true to receive audio in response as a Base64 encoded string instead of a url.
-
-        encoded_as_base_64_with_zero_retention : typing.Optional[bool]
-            Set to true to receive audio in response as a Base64 encoded string with zero data retention
+            Set to true to receive audio in response as a Base64 encoded string instead of a url. This enables zero retention of audio data on Murf's servers.
 
         format : typing.Optional[str]
             Format of the generated audio file. Valid values: MP3, WAV, FLAC, ALAW, ULAW, PCM, OGG
 
-        model_version : typing.Optional[GenerateSpeechRequestModelVersion]
-            Valid values: GEN1, GEN2. Use GEN2 to generate audio using new and advanced model. Outputs from Gen 2 will sound better, but different from the old model
+        model_version : typing.Optional[typing.Literal["GEN2"]]
+            Valid values: GEN2. Audio will be generated using the new and advanced GEN2 model. Outputs from GEN2 sound more natural and high-quality compared to earlier models.
 
         multi_native_locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
@@ -596,7 +586,6 @@ class AsyncTextToSpeechClient:
                 "audioDuration": audio_duration,
                 "channelType": channel_type,
                 "encodeAsBase64": encode_as_base_64,
-                "encodedAsBase64WithZeroRetention": encoded_as_base_64_with_zero_retention,
                 "format": format,
                 "modelVersion": model_version,
                 "multiNativeLocale": multi_native_locale,

@@ -146,15 +146,7 @@ client.text_to_speech.generate(
 <dl>
 <dd>
 
-**encode_as_base_64:** `typing.Optional[bool]` — Set to true to receive audio in response as a Base64 encoded string instead of a url.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**encoded_as_base_64_with_zero_retention:** `typing.Optional[bool]` — Set to true to receive audio in response as a Base64 encoded string with zero data retention
+**encode_as_base_64:** `typing.Optional[bool]` — Set to true to receive audio in response as a Base64 encoded string instead of a url. This enables zero retention of audio data on Murf's servers.
     
 </dd>
 </dl>
@@ -170,7 +162,7 @@ client.text_to_speech.generate(
 <dl>
 <dd>
 
-**model_version:** `typing.Optional[GenerateSpeechRequestModelVersion]` — Valid values: GEN1, GEN2. Use GEN2 to generate audio using new and advanced model. Outputs from Gen 2 will sound better, but different from the old model
+**model_version:** `typing.Optional[typing.Literal["GEN2"]]` — Valid values: GEN2. Audio will be generated using the new and advanced GEN2 model. Outputs from GEN2 sound more natural and high-quality compared to earlier models.
     
 </dd>
 </dl>

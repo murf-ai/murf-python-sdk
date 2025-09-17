@@ -56,7 +56,6 @@ from .client import AsyncMurf, Murf
 from .dubbing_client import MurfDub
 from .environment import MurfEnvironment
 from .stream_input import ReceiveMessage, SendMessage
-from .text_to_speech import GenerateSpeechRequestModelVersion
 from .version import __version__
 
 __all__ = [
@@ -78,7 +77,6 @@ __all__ = [
     "FinalOutput",
     "ForbiddenError",
     "FormDataContentDisposition",
-    "GenerateSpeechRequestModelVersion",
     "GenerateSpeechResponse",
     "GroupApiProjectResponse",
     "InternalServerError",

@@ -3,8 +3,8 @@
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing_extensions
 from ..core.serialization import FieldMetadata
-import pydantic
 import typing
+import pydantic
 from .word_duration_response import WordDurationResponse
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 
@@ -12,9 +12,9 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 class GenerateSpeechResponse(UncheckedBaseModel):
     audio_file: typing_extensions.Annotated[str, FieldMetadata(alias="audioFile")]
     audio_length_in_seconds: typing_extensions.Annotated[float, FieldMetadata(alias="audioLengthInSeconds")]
-    consumed_character_count: typing_extensions.Annotated[int, FieldMetadata(alias="consumedCharacterCount")] = (
-        pydantic.Field()
-    )
+    consumed_character_count: typing_extensions.Annotated[
+        typing.Optional[int], FieldMetadata(alias="consumedCharacterCount")
+    ] = pydantic.Field(default=None)
     """
     Number of characters consumed so far in the current billing cycle.
     """
