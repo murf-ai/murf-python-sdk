@@ -173,7 +173,10 @@ class ProjectsClient:
         client = Murf(
             api_key="YOUR_API_KEY",
         )
-        client.dubbing.projects.list()
+        client.dubbing.projects.list(
+            limit=1,
+            next="next",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/murfdub/projects/list",
@@ -508,7 +511,10 @@ class AsyncProjectsClient:
 
 
         async def main() -> None:
-            await client.dubbing.projects.list()
+            await client.dubbing.projects.list(
+                limit=1,
+                next="next",
+            )
 
 
         asyncio.run(main())

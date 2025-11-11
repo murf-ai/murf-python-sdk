@@ -6,9 +6,53 @@ from __future__ import annotations
 class MurfEnvironment:
     DEFAULT: MurfEnvironment
 
-    def __init__(self, *, base: str, production: str):
+    def __init__(
+        self,
+        *,
+        base: str,
+        global_router: str,
+        us_east: str,
+        us_west: str,
+        india: str,
+        canada: str,
+        south_korea: str,
+        uae: str,
+        japan: str,
+        australia: str,
+        eu_central: str,
+        uk: str,
+        south_america: str,
+        production: str,
+    ):
         self.base = base
+        self.global_router = global_router
+        self.us_east = us_east
+        self.us_west = us_west
+        self.india = india
+        self.canada = canada
+        self.south_korea = south_korea
+        self.uae = uae
+        self.japan = japan
+        self.australia = australia
+        self.eu_central = eu_central
+        self.uk = uk
+        self.south_america = south_america
         self.production = production
 
 
-MurfEnvironment.DEFAULT = MurfEnvironment(base="https://api.murf.ai", production="wss://api.murf.ai/v1/speech")
+MurfEnvironment.DEFAULT = MurfEnvironment(
+    base="https://api.murf.ai",
+    global_router="https://global.api.murf.ai",
+    us_east="https://us-east.api.murf.ai",
+    us_west="https://us-west.api.murf.ai",
+    india="https://in.api.murf.ai",
+    canada="https://ca.api.murf.ai",
+    south_korea="https://kr.api.murf.ai",
+    uae="https://me.api.murf.ai",
+    japan="https://jp.api.murf.ai",
+    australia="https://au.api.murf.ai",
+    eu_central="https://eu-central.api.murf.ai",
+    uk="https://uk.api.murf.ai",
+    south_america="https://sa-east.api.murf.ai",
+    production="wss://global.api.murf.ai/v1/speech",
+)
