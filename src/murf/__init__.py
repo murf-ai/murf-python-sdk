@@ -55,6 +55,7 @@ from . import auth, dubbing, stream_input, text, text_to_speech, voice_changer
 from .client import AsyncMurf, Murf
 from .dubbing_client import MurfDub
 from .environment import MurfEnvironment
+from .region import MurfRegion
 from .stream_input import ReceiveMessage, SendMessage, TextToSpeechModel
 from .version import __version__
 
@@ -87,6 +88,7 @@ __all__ = [
     "MurfApiTranslationResponse",
     "MurfDub",
     "MurfEnvironment",
+    "MurfRegion",
     "PaymentRequiredError",
     "PronunciationDetail",
     "PronunciationDetailType",
