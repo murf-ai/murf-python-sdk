@@ -4,7 +4,7 @@ import typing
 import os
 import httpx
 from .version import __version__
-
+from .region import MurfRegion, region_environment_map
 class Murf(BaseClient):
     """
     Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
@@ -19,7 +19,8 @@ class Murf(BaseClient):
 
         Defaults to MurfEnvironment.DEFAULT
 
-
+    region : MurfRegion
+        The region to use for requests from the client. Defaults to "default".
 
     api_key : typing.Optional[str]
     timeout : typing.Optional[float]
@@ -43,7 +44,8 @@ class Murf(BaseClient):
     def __init__(
         self,
         *,
-        environment: MurfEnvironment = MurfEnvironment.DEFAULT,
+        environment: typing.Optional[MurfEnvironment] = None,
+        region: MurfRegion = MurfRegion.DEFAULT,
         api_key: typing.Optional[str] = os.getenv("MURF_API_KEY"),
         timeout: typing.Optional[float] = 60,
         follow_redirects: typing.Optional[bool] = True,
@@ -52,6 +54,8 @@ class Murf(BaseClient):
         default_params = {'origin': f'python_sdk_{__version__}'}
         _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
         httpx_client=httpx_client if httpx_client is not None else httpx.Client(params=default_params, timeout=_defaulted_timeout, follow_redirects=follow_redirects) if follow_redirects is not None else httpx.Client(params=default_params, timeout=_defaulted_timeout)
+
+        environment = environment if environment is not None else region_environment_map.get(region, MurfEnvironment.DEFAULT)
 
         super().__init__(
             environment=environment,
@@ -77,7 +81,8 @@ class AsyncMurf(AsyncBaseClient):
 
         Defaults to MurfEnvironment.DEFAULT
 
-
+    region : MurfRegion
+        The region to use for requests from the client. Defaults to "default".
 
     api_key : typing.Optional[str]
     timeout : typing.Optional[float]
@@ -101,7 +106,8 @@ class AsyncMurf(AsyncBaseClient):
     def __init__(
         self,
         *,
-        environment: MurfEnvironment = MurfEnvironment.DEFAULT,
+        environment: typing.Optional[MurfEnvironment] = None,
+        region: MurfRegion = MurfRegion.DEFAULT,
         api_key: typing.Optional[str] = os.getenv("MURF_API_KEY"),
         timeout: typing.Optional[float] = 60,
         follow_redirects: typing.Optional[bool] = True,
@@ -110,7 +116,9 @@ class AsyncMurf(AsyncBaseClient):
         default_params = {'origin': f'python_sdk_{__version__}'}
         _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
         httpx_client=httpx_client if httpx_client is not None else httpx.AsyncClient(params=default_params, timeout=_defaulted_timeout, follow_redirects=follow_redirects) if follow_redirects is not None else httpx.AsyncClient(params=default_params, timeout=_defaulted_timeout)
-        
+
+        environment = environment if environment is not None else region_environment_map.get(region, MurfEnvironment.DEFAULT)
+
         super().__init__(
             environment=environment,
             api_key=api_key,
