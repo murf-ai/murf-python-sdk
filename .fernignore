@@ -3,6 +3,7 @@
 src/murf/client.py
 src/murf/dubbing_client.py
 src/murf/utils.py
+src/murf/region.py
 LICENSE
 
 README.md
