@@ -2,5 +2,6 @@
 
 from .receive_message import ReceiveMessage
 from .send_message import SendMessage
+from .text_to_speech_model import TextToSpeechModel
 
-__all__ = ["ReceiveMessage", "SendMessage"]
+__all__ = ["ReceiveMessage", "SendMessage", "TextToSpeechModel"]

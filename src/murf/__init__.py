@@ -55,7 +55,7 @@ from . import auth, dubbing, stream_input, text, text_to_speech, voice_changer
 from .client import AsyncMurf, Murf
 from .dubbing_client import MurfDub
 from .environment import MurfEnvironment
-from .stream_input import ReceiveMessage, SendMessage
+from .stream_input import ReceiveMessage, SendMessage, TextToSpeechModel
 from .version import __version__
 
 __all__ = [
@@ -105,6 +105,7 @@ __all__ = [
     "SourceLocaleResponse",
     "SpeechToSpeechResponse",
     "StyleDetails",
+    "TextToSpeechModel",
     "Translation",
     "TtsRequestBothPayload",
     "TtsRequestBothPayloadVoiceConfig",

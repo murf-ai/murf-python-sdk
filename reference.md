@@ -96,7 +96,7 @@ client = Murf(
 client.text_to_speech.generate(
     format="MP3",
     sample_rate=44100.0,
-    text="Hello, world!",
+    text="Hi, How are you doing today?",
     voice_id="en-US-natalie",
 )
 
@@ -267,7 +267,24 @@ An object used to define custom pronunciations.
 <dl>
 <dd>
 
-Returns a streaming output of generated audio
+Synthesize speech with ultra-low latency over a streaming connection.
+Choose the `Base URL` from the URL dropdown (Global URL or a pinned Region)
+
+**Note**: Global URL auto-routes to the nearest region.
+| Region         | URL                                       | Default Concurrency |
+| ------------------------- | ---------------------------------------------- | -------------------- |
+| Global (Routes to the nearest server) | `https://global.api.murf.ai/v1/speech/stream`     | Region specific concurrency |
+| US-East                   | `https://us-east.api.murf.ai/v1/speech/stream`    | 15 |
+| US-West                   | `https://us-west.api.murf.ai/v1/speech/stream`    | 2 |
+| India                     | `https://in.api.murf.ai/v1/speech/stream`         | 2 |
+| Canada                    | `https://ca.api.murf.ai/v1/speech/stream`         | 2 |
+| South Korea               | `https://kr.api.murf.ai/v1/speech/stream`         | 2 |
+| UAE                       | `https://me.api.murf.ai/v1/speech/stream`         | 2 |
+| Japan                     | `https://jp.api.murf.ai/v1/speech/stream`         | 2 |
+| Australia                 | `https://au.api.murf.ai/v1/speech/stream`         | 2 |
+| EU (Central)              | `https://eu-central.api.murf.ai/v1/speech/stream` | 2 |
+| UK                        | `https://uk.api.murf.ai/v1/speech/stream`         | 2 |
+| South America (São Paulo) | `https://sa-east.api.murf.ai/v1/speech/stream`    | 2 |
 </dd>
 </dl>
 </dd>
@@ -287,7 +304,10 @@ from murf import Murf
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.text_to_speech.stream()
+client.text_to_speech.stream(
+    text="text",
+    voice_id="voiceId",
+)
 
 ```
 </dd>
@@ -319,6 +339,14 @@ client.text_to_speech.stream()
 <dl>
 <dd>
 
+**model:** `typing.Optional[str]` — The model to use for audio output. Defaults to FALCON for all the regions except US-East. Valid values: FALCON, GEN2
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **channel_type:** `typing.Optional[str]` — Valid values: STEREO, MONO
     
 </dd>
@@ -327,7 +355,7 @@ client.text_to_speech.stream()
 <dl>
 <dd>
 
-**format:** `typing.Optional[str]` — Format of the generated audio file. Valid values: MP3, WAV, PCM
+**format:** `typing.Optional[str]` — Format of the generated audio file.Valid values: MP3, FLAC, WAV, ALAW, ULAW, OGG, PCM
     
 </dd>
 </dl>
@@ -337,7 +365,7 @@ client.text_to_speech.stream()
 
 **multi_native_locale:** `typing.Optional[str]` 
 
-Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
+Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
 Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
     
 </dd>
@@ -376,7 +404,7 @@ An object used to define custom pronunciations.
 <dl>
 <dd>
 
-**sample_rate:** `typing.Optional[float]` — Valid values are 8000, 24000, 44100, 48000
+**sample_rate:** `typing.Optional[float]` — Valid values are 8000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
     
 </dd>
 </dl>
@@ -444,7 +472,9 @@ from murf import Murf
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.text_to_speech.get_voices()
+client.text_to_speech.get_voices(
+    token="token",
+)
 
 ```
 </dd>
@@ -1245,7 +1275,10 @@ from murf import Murf
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.dubbing.projects.list()
+client.dubbing.projects.list(
+    limit=1,
+    next="next",
+)
 
 ```
 </dd>

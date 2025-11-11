@@ -42,7 +42,7 @@ class SendTextVoiceConfig(UncheckedBaseModel):
 
     multi_native_locale: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model. Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speed/voices endpoint to retrieve the list of available voices and languages.
+    Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speed/voices endpoint to retrieve the list of available voices and languages.
     """
 
     if IS_PYDANTIC_V2:

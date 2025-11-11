@@ -116,7 +116,7 @@ class TextToSpeechClient:
             api_key="YOUR_API_KEY",
         )
         client.text_to_speech.generate(
-            text="Hello, world!",
+            text="Hi, How are you doing today?",
             voice_id="en-US-natalie",
         )
         """
@@ -220,6 +220,7 @@ class TextToSpeechClient:
         *,
         text: str,
         voice_id: str,
+        model: typing.Optional[str] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         format: typing.Optional[str] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
@@ -232,7 +233,24 @@ class TextToSpeechClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Iterator[bytes]:
         """
-        Returns a streaming output of generated audio
+        Synthesize speech with ultra-low latency over a streaming connection.
+        Choose the `Base URL` from the URL dropdown (Global URL or a pinned Region)
+
+        **Note**: Global URL auto-routes to the nearest region.
+        | Region         | URL                                       | Default Concurrency |
+        | ------------------------- | ---------------------------------------------- | -------------------- |
+        | Global (Routes to the nearest server) | `https://global.api.murf.ai/v1/speech/stream`     | Region specific concurrency |
+        | US-East                   | `https://us-east.api.murf.ai/v1/speech/stream`    | 15 |
+        | US-West                   | `https://us-west.api.murf.ai/v1/speech/stream`    | 2 |
+        | India                     | `https://in.api.murf.ai/v1/speech/stream`         | 2 |
+        | Canada                    | `https://ca.api.murf.ai/v1/speech/stream`         | 2 |
+        | South Korea               | `https://kr.api.murf.ai/v1/speech/stream`         | 2 |
+        | UAE                       | `https://me.api.murf.ai/v1/speech/stream`         | 2 |
+        | Japan                     | `https://jp.api.murf.ai/v1/speech/stream`         | 2 |
+        | Australia                 | `https://au.api.murf.ai/v1/speech/stream`         | 2 |
+        | EU (Central)              | `https://eu-central.api.murf.ai/v1/speech/stream` | 2 |
+        | UK                        | `https://uk.api.murf.ai/v1/speech/stream`         | 2 |
+        | South America (São Paulo) | `https://sa-east.api.murf.ai/v1/speech/stream`    | 2 |
 
         Parameters
         ----------
@@ -242,14 +260,17 @@ class TextToSpeechClient:
         voice_id : str
             Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
 
+        model : typing.Optional[str]
+            The model to use for audio output. Defaults to FALCON for all the regions except US-East. Valid values: FALCON, GEN2
+
         channel_type : typing.Optional[str]
             Valid values: STEREO, MONO
 
         format : typing.Optional[str]
-            Format of the generated audio file. Valid values: MP3, WAV, PCM
+            Format of the generated audio file.Valid values: MP3, FLAC, WAV, ALAW, ULAW, OGG, PCM
 
         multi_native_locale : typing.Optional[str]
-            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
+            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
             Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
 
         pitch : typing.Optional[int]
@@ -266,7 +287,7 @@ class TextToSpeechClient:
             Speed of the voiceover
 
         sample_rate : typing.Optional[float]
-            Valid values are 8000, 24000, 44100, 48000
+            Valid values are 8000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
 
         style : typing.Optional[str]
             The voice style to be used for voiceover generation.
@@ -289,13 +310,17 @@ class TextToSpeechClient:
         client = Murf(
             api_key="YOUR_API_KEY",
         )
-        client.text_to_speech.stream()
+        client.text_to_speech.stream(
+            text="text",
+            voice_id="voiceId",
+        )
         """
         with self._client_wrapper.httpx_client.stream(
             "v1/speech/stream",
-            base_url=self._client_wrapper.get_environment().base,
+            base_url=self._client_wrapper.get_environment().global_router,
             method="POST",
             json={
+                "model": model,
                 "channelType": channel_type,
                 "format": format,
                 "multiNativeLocale": multi_native_locale,
@@ -405,7 +430,9 @@ class TextToSpeechClient:
         client = Murf(
             api_key="YOUR_API_KEY",
         )
-        client.text_to_speech.get_voices()
+        client.text_to_speech.get_voices(
+            token="token",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/speech/voices",
@@ -571,7 +598,7 @@ class AsyncTextToSpeechClient:
 
         async def main() -> None:
             await client.text_to_speech.generate(
-                text="Hello, world!",
+                text="Hi, How are you doing today?",
                 voice_id="en-US-natalie",
             )
 
@@ -678,6 +705,7 @@ class AsyncTextToSpeechClient:
         *,
         text: str,
         voice_id: str,
+        model: typing.Optional[str] = OMIT,
         channel_type: typing.Optional[str] = OMIT,
         format: typing.Optional[str] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
@@ -690,7 +718,24 @@ class AsyncTextToSpeechClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.AsyncIterator[bytes]:
         """
-        Returns a streaming output of generated audio
+        Synthesize speech with ultra-low latency over a streaming connection.
+        Choose the `Base URL` from the URL dropdown (Global URL or a pinned Region)
+
+        **Note**: Global URL auto-routes to the nearest region.
+        | Region         | URL                                       | Default Concurrency |
+        | ------------------------- | ---------------------------------------------- | -------------------- |
+        | Global (Routes to the nearest server) | `https://global.api.murf.ai/v1/speech/stream`     | Region specific concurrency |
+        | US-East                   | `https://us-east.api.murf.ai/v1/speech/stream`    | 15 |
+        | US-West                   | `https://us-west.api.murf.ai/v1/speech/stream`    | 2 |
+        | India                     | `https://in.api.murf.ai/v1/speech/stream`         | 2 |
+        | Canada                    | `https://ca.api.murf.ai/v1/speech/stream`         | 2 |
+        | South Korea               | `https://kr.api.murf.ai/v1/speech/stream`         | 2 |
+        | UAE                       | `https://me.api.murf.ai/v1/speech/stream`         | 2 |
+        | Japan                     | `https://jp.api.murf.ai/v1/speech/stream`         | 2 |
+        | Australia                 | `https://au.api.murf.ai/v1/speech/stream`         | 2 |
+        | EU (Central)              | `https://eu-central.api.murf.ai/v1/speech/stream` | 2 |
+        | UK                        | `https://uk.api.murf.ai/v1/speech/stream`         | 2 |
+        | South America (São Paulo) | `https://sa-east.api.murf.ai/v1/speech/stream`    | 2 |
 
         Parameters
         ----------
@@ -700,14 +745,17 @@ class AsyncTextToSpeechClient:
         voice_id : str
             Use the GET /v1/speech/voices API to find supported voiceIds. You can use either the voiceId (e.g. en-US-natalie) or just the voice actor's name (e.g. natalie).
 
+        model : typing.Optional[str]
+            The model to use for audio output. Defaults to FALCON for all the regions except US-East. Valid values: FALCON, GEN2
+
         channel_type : typing.Optional[str]
             Valid values: STEREO, MONO
 
         format : typing.Optional[str]
-            Format of the generated audio file. Valid values: MP3, WAV, PCM
+            Format of the generated audio file.Valid values: MP3, FLAC, WAV, ALAW, ULAW, OGG, PCM
 
         multi_native_locale : typing.Optional[str]
-            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
+            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
             Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
 
         pitch : typing.Optional[int]
@@ -724,7 +772,7 @@ class AsyncTextToSpeechClient:
             Speed of the voiceover
 
         sample_rate : typing.Optional[float]
-            Valid values are 8000, 24000, 44100, 48000
+            Valid values are 8000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
 
         style : typing.Optional[str]
             The voice style to be used for voiceover generation.
@@ -752,16 +800,20 @@ class AsyncTextToSpeechClient:
 
 
         async def main() -> None:
-            await client.text_to_speech.stream()
+            await client.text_to_speech.stream(
+                text="text",
+                voice_id="voiceId",
+            )
 
 
         asyncio.run(main())
         """
         async with self._client_wrapper.httpx_client.stream(
             "v1/speech/stream",
-            base_url=self._client_wrapper.get_environment().base,
+            base_url=self._client_wrapper.get_environment().global_router,
             method="POST",
             json={
+                "model": model,
                 "channelType": channel_type,
                 "format": format,
                 "multiNativeLocale": multi_native_locale,
@@ -876,7 +928,9 @@ class AsyncTextToSpeechClient:
 
 
         async def main() -> None:
-            await client.text_to_speech.get_voices()
+            await client.text_to_speech.get_voices(
+                token="token",
+            )
 
 
         asyncio.run(main())
