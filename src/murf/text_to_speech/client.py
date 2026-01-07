@@ -287,7 +287,7 @@ class TextToSpeechClient:
             Speed of the voiceover
 
         sample_rate : typing.Optional[float]
-            Valid values are 8000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
+            Valid values are 8000, 16000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
 
         style : typing.Optional[str]
             The voice style to be used for voiceover generation.
@@ -310,10 +310,7 @@ class TextToSpeechClient:
         client = Murf(
             api_key="YOUR_API_KEY",
         )
-        client.text_to_speech.stream(
-            text="text",
-            voice_id="voiceId",
-        )
+        client.text_to_speech.stream()
         """
         with self._client_wrapper.httpx_client.stream(
             "v1/speech/stream",
@@ -406,13 +403,20 @@ class TextToSpeechClient:
             raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def get_voices(
-        self, *, token: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        model: typing.Optional[str] = None,
+        token: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[ApiVoice]:
         """
         Returns a list of available voices for speech synthesis
 
         Parameters
         ----------
+        model : typing.Optional[str]
+            Valid values: FALCON, GEN2
+
         token : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -432,12 +436,16 @@ class TextToSpeechClient:
         )
         client.text_to_speech.get_voices(
             token="token",
+            model="FALCON",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
             "v1/speech/voices",
             base_url=self._client_wrapper.get_environment().base,
             method="GET",
+            params={
+                "model": model,
+            },
             headers={
                 "token": str(token) if token is not None else None,
             },
@@ -772,7 +780,7 @@ class AsyncTextToSpeechClient:
             Speed of the voiceover
 
         sample_rate : typing.Optional[float]
-            Valid values are 8000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
+            Valid values are 8000, 16000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
 
         style : typing.Optional[str]
             The voice style to be used for voiceover generation.
@@ -800,10 +808,7 @@ class AsyncTextToSpeechClient:
 
 
         async def main() -> None:
-            await client.text_to_speech.stream(
-                text="text",
-                voice_id="voiceId",
-            )
+            await client.text_to_speech.stream()
 
 
         asyncio.run(main())
@@ -899,13 +904,20 @@ class AsyncTextToSpeechClient:
             raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def get_voices(
-        self, *, token: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        model: typing.Optional[str] = None,
+        token: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[ApiVoice]:
         """
         Returns a list of available voices for speech synthesis
 
         Parameters
         ----------
+        model : typing.Optional[str]
+            Valid values: FALCON, GEN2
+
         token : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -930,6 +942,7 @@ class AsyncTextToSpeechClient:
         async def main() -> None:
             await client.text_to_speech.get_voices(
                 token="token",
+                model="FALCON",
             )
 
 
@@ -939,6 +952,9 @@ class AsyncTextToSpeechClient:
             "v1/speech/voices",
             base_url=self._client_wrapper.get_environment().base,
             method="GET",
+            params={
+                "model": model,
+            },
             headers={
                 "token": str(token) if token is not None else None,
             },

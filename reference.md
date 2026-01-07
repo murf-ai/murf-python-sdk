@@ -304,10 +304,7 @@ from murf import Murf
 client = Murf(
     api_key="YOUR_API_KEY",
 )
-client.text_to_speech.stream(
-    text="text",
-    voice_id="voiceId",
-)
+client.text_to_speech.stream()
 
 ```
 </dd>
@@ -404,7 +401,7 @@ An object used to define custom pronunciations.
 <dl>
 <dd>
 
-**sample_rate:** `typing.Optional[float]` — Valid values are 8000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
+**sample_rate:** `typing.Optional[float]` — Valid values are 8000, 16000, 24000, 44100, 48000. Defaults to 24000 for Falcon model and 44100 for Gen2 model.
     
 </dd>
 </dl>
@@ -474,6 +471,7 @@ client = Murf(
 )
 client.text_to_speech.get_voices(
     token="token",
+    model="FALCON",
 )
 
 ```
@@ -486,6 +484,14 @@ client.text_to_speech.get_voices(
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**model:** `typing.Optional[str]` — Valid values: FALCON, GEN2
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
