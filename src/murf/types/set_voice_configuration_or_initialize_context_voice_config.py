@@ -44,6 +44,13 @@ class SetVoiceConfigurationOrInitializeContextVoiceConfig(UncheckedBaseModel):
 
     multi_native_locale: typing.Optional[str] = pydantic.Field(default=None)
     """
+    This field is superseded by `locale` field. Please migrate to `locale` field to ensure compatibility with future API versions.
+    
+    Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speed/voices endpoint to retrieve the list of available voices and languages.
+    """
+
+    locale: typing.Optional[str] = pydantic.Field(default=None)
+    """
     Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speed/voices endpoint to retrieve the list of available voices and languages.
     """
 

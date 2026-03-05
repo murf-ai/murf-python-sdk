@@ -95,9 +95,10 @@ client = Murf(
 )
 client.text_to_speech.generate(
     format="MP3",
+    locale="en-US",
     sample_rate=44100.0,
     text="Hi, How are you doing today?",
-    voice_id="en-US-natalie",
+    voice_id="Natalie",
 )
 
 ```
@@ -171,6 +172,19 @@ client.text_to_speech.generate(
 <dd>
 
 **multi_native_locale:** `typing.Optional[str]` 
+
+This field is superseded by `locale` field. Please migrate to `locale` field to ensure compatibility with future API versions.
+
+Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
+Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**locale:** `typing.Optional[str]` 
 
 Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
 Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
@@ -361,6 +375,19 @@ client.text_to_speech.stream()
 <dd>
 
 **multi_native_locale:** `typing.Optional[str]` 
+
+This field is superseded by `locale` field. Please migrate to `locale` field to ensure compatibility with future API versions.
+
+Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
+Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**locale:** `typing.Optional[str]` 
 
 Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
 Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.

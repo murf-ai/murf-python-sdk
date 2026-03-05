@@ -36,6 +36,7 @@ class TextToSpeechClient:
         format: typing.Optional[str] = OMIT,
         model_version: typing.Optional[typing.Literal["GEN2"]] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
+        locale: typing.Optional[str] = OMIT,
         pitch: typing.Optional[int] = OMIT,
         pronunciation_dictionary: typing.Optional[typing.Dict[str, PronunciationDetail]] = OMIT,
         rate: typing.Optional[int] = OMIT,
@@ -72,6 +73,12 @@ class TextToSpeechClient:
             Valid values: GEN2. Audio will be generated using the new and advanced GEN2 model. Outputs from GEN2 sound more natural and high-quality compared to earlier models.
 
         multi_native_locale : typing.Optional[str]
+            This field is superseded by `locale` field. Please migrate to `locale` field to ensure compatibility with future API versions.
+
+            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
+            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
+
+        locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
             Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
 
@@ -116,8 +123,9 @@ class TextToSpeechClient:
             api_key="YOUR_API_KEY",
         )
         client.text_to_speech.generate(
+            locale="en-US",
             text="Hi, How are you doing today?",
-            voice_id="en-US-natalie",
+            voice_id="Natalie",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -131,6 +139,7 @@ class TextToSpeechClient:
                 "format": format,
                 "modelVersion": model_version,
                 "multiNativeLocale": multi_native_locale,
+                "locale": locale,
                 "pitch": pitch,
                 "pronunciationDictionary": convert_and_respect_annotation_metadata(
                     object_=pronunciation_dictionary,
@@ -224,6 +233,7 @@ class TextToSpeechClient:
         channel_type: typing.Optional[str] = OMIT,
         format: typing.Optional[str] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
+        locale: typing.Optional[str] = OMIT,
         pitch: typing.Optional[int] = OMIT,
         pronunciation_dictionary: typing.Optional[typing.Dict[str, PronunciationDetail]] = OMIT,
         rate: typing.Optional[int] = OMIT,
@@ -270,6 +280,12 @@ class TextToSpeechClient:
             Format of the generated audio file.Valid values: MP3, FLAC, WAV, ALAW, ULAW, OGG, PCM
 
         multi_native_locale : typing.Optional[str]
+            This field is superseded by `locale` field. Please migrate to `locale` field to ensure compatibility with future API versions.
+
+            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
+            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
+
+        locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
             Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
 
@@ -321,6 +337,7 @@ class TextToSpeechClient:
                 "channelType": channel_type,
                 "format": format,
                 "multiNativeLocale": multi_native_locale,
+                "locale": locale,
                 "pitch": pitch,
                 "pronunciationDictionary": convert_and_respect_annotation_metadata(
                     object_=pronunciation_dictionary,
@@ -521,6 +538,7 @@ class AsyncTextToSpeechClient:
         format: typing.Optional[str] = OMIT,
         model_version: typing.Optional[typing.Literal["GEN2"]] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
+        locale: typing.Optional[str] = OMIT,
         pitch: typing.Optional[int] = OMIT,
         pronunciation_dictionary: typing.Optional[typing.Dict[str, PronunciationDetail]] = OMIT,
         rate: typing.Optional[int] = OMIT,
@@ -557,6 +575,12 @@ class AsyncTextToSpeechClient:
             Valid values: GEN2. Audio will be generated using the new and advanced GEN2 model. Outputs from GEN2 sound more natural and high-quality compared to earlier models.
 
         multi_native_locale : typing.Optional[str]
+            This field is superseded by `locale` field. Please migrate to `locale` field to ensure compatibility with future API versions.
+
+            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
+            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
+
+        locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively. Only available in the Gen2 model.
             Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
 
@@ -606,8 +630,9 @@ class AsyncTextToSpeechClient:
 
         async def main() -> None:
             await client.text_to_speech.generate(
+                locale="en-US",
                 text="Hi, How are you doing today?",
-                voice_id="en-US-natalie",
+                voice_id="Natalie",
             )
 
 
@@ -624,6 +649,7 @@ class AsyncTextToSpeechClient:
                 "format": format,
                 "modelVersion": model_version,
                 "multiNativeLocale": multi_native_locale,
+                "locale": locale,
                 "pitch": pitch,
                 "pronunciationDictionary": convert_and_respect_annotation_metadata(
                     object_=pronunciation_dictionary,
@@ -717,6 +743,7 @@ class AsyncTextToSpeechClient:
         channel_type: typing.Optional[str] = OMIT,
         format: typing.Optional[str] = OMIT,
         multi_native_locale: typing.Optional[str] = OMIT,
+        locale: typing.Optional[str] = OMIT,
         pitch: typing.Optional[int] = OMIT,
         pronunciation_dictionary: typing.Optional[typing.Dict[str, PronunciationDetail]] = OMIT,
         rate: typing.Optional[int] = OMIT,
@@ -763,6 +790,12 @@ class AsyncTextToSpeechClient:
             Format of the generated audio file.Valid values: MP3, FLAC, WAV, ALAW, ULAW, OGG, PCM
 
         multi_native_locale : typing.Optional[str]
+            This field is superseded by `locale` field. Please migrate to `locale` field to ensure compatibility with future API versions.
+
+            Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
+            Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
+
+        locale : typing.Optional[str]
             Specifies the language for the generated audio, enabling a voice to speak in multiple languages natively.
             Valid values: "en-US", "en-UK", "es-ES", etc. Use the GET /v1/speech/voices endpoint to retrieve the list of available voices and languages.
 
@@ -822,6 +855,7 @@ class AsyncTextToSpeechClient:
                 "channelType": channel_type,
                 "format": format,
                 "multiNativeLocale": multi_native_locale,
+                "locale": locale,
                 "pitch": pitch,
                 "pronunciationDictionary": convert_and_respect_annotation_metadata(
                     object_=pronunciation_dictionary,
