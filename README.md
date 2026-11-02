@@ -11,6 +11,9 @@
 - [Overview](#overview)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
+  - [Streaming (Falcon 2.1)](#streaming-falcon-21)
+  - [Synthesize (Gen 2)](#synthesize-gen-2)
+  - [List Voices](#list-voices)
 - [Features](#features)
 - [Asynchronous Usage](#async-client)
 - [Exception Handling](#exception-handling)
@@ -22,7 +25,12 @@
 
 ## Overview
 
-The Murf Python SDK offers seamless integration with the [Murf AI](https://murf.ai/) [text-to-speech software](https://murf.ai/text-to-speech), enabling developers and creators to convert text into lifelike speech effortlessly. With over 130 natural-sounding voices across 21 languages and 20+ speaking styles, Murf provides unparalleled speech customization for a wide range of applications. The SDK is designed for both synchronous and asynchronous workflows, featuring robust error handling, advanced configuration options, and support for real-time applications.
+The Murf Python SDK integrates with the [Murf API](https://murf.ai/api/docs/introduction/overview) for [text-to-speech](https://murf.ai/text-to-speech). Murf offers two TTS models:
+
+- **Streaming ([Falcon 2.1](https://murf.ai/api/docs/text-to-speech-models/falcon-2-1)):** Real-time, low-latency speech for conversational AI and voice agents (time-to-first-audio under 100ms). Use `client.text_to_speech.stream(...)`.
+- **Synthesize ([Gen 2](https://murf.ai/api/docs/text-to-speech-models/gen-2)):** Studio-quality voiceover files with styles, pauses, duration, and variation. Use `client.text_to_speech.generate(...)`. Gen 2 is not available for streaming.
+
+Together they cover 150+ voices across 35 languages. Each model has its own catalog; see the [Voice Library](https://murf.ai/api/docs/voices-styles/voice-library). The SDK supports both synchronous and asynchronous clients.
 
 ---
 
@@ -40,7 +48,9 @@ pip install murf pyaudio
 
 ## Getting Started
 
-Here's a quick example to get you started with the Murf SDK:
+Use [Streaming (Falcon 2.1)](https://murf.ai/api/docs/text-to-speech/streaming) for real-time voice agents, or [Synthesize (Gen 2)](https://murf.ai/api/docs/text-to-speech/synthesize) for a studio voiceover file. See the [Quickstart](https://murf.ai/api/docs/introduction/quickstart) and [TTS overview](https://murf.ai/api/docs/text-to-speech/overview).
+
+### Streaming (Falcon 2.1)
 
 ```python
 import pyaudio
@@ -91,21 +101,54 @@ if __name__ == "__main__":
     play_streaming_audio()
 ```
 
-For more detailed information, refer to the [official documentation](https://murf.ai/api/docs/introduction/quickstart).
+See [HTTP streaming](https://murf.ai/api/docs/text-to-speech/streaming) for regions, formats, and WebSocket streaming.
+
+### Synthesize (Gen 2)
+
+```python
+from murf import Murf
+
+client = Murf(
+    api_key="YOUR_API_KEY",  # Not required if MURF_API_KEY is set
+)
+res = client.text_to_speech.generate(
+    text="There is much to be said",
+    voice_id="Terrell",
+    locale="en-US",
+)
+print(res.audio_file)
+```
+
+The response includes a URL to the generated audio file. The file is available for download for 72 hours. See [Synthesize](https://murf.ai/api/docs/text-to-speech/synthesize).
+
+### List Voices
+
+Each model has its own voice catalog. Pass `model` when listing voices: `falcon-2.1` for streaming, `gen2` for synthesis.
+
+```python
+from murf import Murf
+
+client = Murf(api_key="YOUR_API_KEY")
+streaming_voices = client.text_to_speech.get_voices(model="falcon-2.1")
+studio_voices = client.text_to_speech.get_voices(model="gen2")
+```
+
+See [List Voices](https://murf.ai/api/docs/api-reference/voices/get-voices) and the [Voice Library](https://murf.ai/api/docs/voices-styles/voice-library).
 
 ---
 
 ## Features
 
-- **Text-to-Speech Conversion:** Transform text into natural-sounding speech.
-- **Multilingual Support:** Access voices in over 21 languages, including English, French, German, Spanish, Italian, Hindi, Portuguese, Dutch, Korean, Chinese (Mandarin), Bengali, Tamil, Polish, Japanese, Turkish, Indonesian, Croatian, Greek, Romanian, Slovak, and Bulgarian.
+- **Streaming (Falcon 2.1):** Real-time speech for voice agents and conversational AI. See [Falcon 2.1](https://murf.ai/api/docs/text-to-speech-models/falcon-2-1) and [HTTP streaming](https://murf.ai/api/docs/text-to-speech/streaming).
+- **Synthesize (Gen 2):** Studio-quality voiceover files with styles, pauses, duration, and variation. See [Gen 2](https://murf.ai/api/docs/text-to-speech-models/gen-2) and [Synthesize](https://murf.ai/api/docs/text-to-speech/synthesize).
+- **Model-specific voice catalogs:** Fetch streaming voices with `get_voices(model="falcon-2.1")` and studio voices with `get_voices(model="gen2")`. See [List Voices](https://murf.ai/api/docs/api-reference/voices/get-voices) and the [Voice Library](https://murf.ai/api/docs/voices-styles/voice-library).
+- **150+ voices across 35 languages** and 20+ speaking styles.
 
 ![Murf AI Languages](https://murf.ai/public-assets/home/Murf_Languages_21.jpg)
 
-- **Multiple Voice Styles:** Choose from 20+ speaking styles to suit your application's needs.
-- **Advanced Voice Customization:** Adjust parameters like pitch, speed, pauses, and pronunciation for optimal output. Fine-grained controls let you tailor the voice output to match your specific requirements.
-- **Multiple Audio Formats:** Generate audio in various formats (e.g., MP3, WAV) with configurable sample rates for optimal quality.
-- **Real-Time Processing:** Benefit from asynchronous API calls that support non-blocking, real-time audio generation and streaming scenarios.
+- **Voice customization:** Adjust pitch, rate, locale, and pronunciation. Styles, pauses, duration, and variation are available on Synthesize (Gen 2).
+- **Multiple audio formats:** MP3, WAV, FLAC, PCM, and others, with configurable sample rates.
+- **Sync and async clients:** Blocking calls with `Murf`, or non-blocking calls with `AsyncMurf`.
 
 
 ---
